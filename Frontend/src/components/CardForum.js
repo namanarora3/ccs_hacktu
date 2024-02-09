@@ -19,6 +19,7 @@ import Button from '@mui/material/Button';
 import { useState } from 'react';
 import { left } from '@popperjs/core';
 import styles from './CardForum.module.css'
+import Link from 'next/link';
 
 // Styled Box component
 const StyledBox = styled(Box)(({ theme }) => ({
@@ -59,7 +60,7 @@ const CardMembership = ({ issues = [] }) => {
 
   // Function to determine if the description is longer than the limit
   const isDescriptionLong = (description) => {
-    const words = description.split(' ');
+    const words = description?.split(' ');
     return words.length >  60;
   };
 
@@ -82,6 +83,7 @@ const CardMembership = ({ issues = [] }) => {
   return (
     <>
       {issues.map((issue, index) => (
+        <Link href={`/post-page?id=${issue.id}`}>
         <Card key={index} sx={{ marginBottom: 2 }}>
           <Grid container spacing={6}>
             <Grid item xs={12} sm={7}>
@@ -90,7 +92,7 @@ const CardMembership = ({ issues = [] }) => {
               <Box sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between' }}>
                     <Box sx={{ mr: 2, display: 'flex', alignItems: 'center' }}>
                       <Avatar alt='Name' src='/images/avatars/4.png' sx={{ width: 34, height: 34, marginRight: 2.75,marginTop: 5 }} />
-                      <Typography variant='body5' sx={{ color: 'common.black' ,marginTop:5}}>
+                      <Typography variant='body5' sx={{marginTop:5}}>
                        {issue.user_name}
                       </Typography>
                     </Box>
@@ -119,13 +121,13 @@ const CardMembership = ({ issues = [] }) => {
   <Grid item xs={12} sm={7}>
     <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
         <Button onClick={() => handleUpvote(index)} color="primary" sx={{ marginRight: 1 }}>
-          <StarOutline sx={{ color: 'primary.main', variant: 'outlined', alignSelf: left }} fontSize='small' />
-          <Typography variant='body2'>Upvote {upvoteCounts[index] || issue.upvoteCount}</Typography>
+          <StarOutline sx={{ color: 'primary.main', variant: 'outlined', alignSelf: left, marginTop:2 }} fontSize='small' />
+          <Typography variant='body2' sx={{marginLeft:2, marginTop:1}}>Upvote {upvoteCounts[index] || issue.upvoteCount}</Typography>
         </Button>
         
       <Box sx={{ mb: 1, display: 'flex', alignItems: 'center' }}>
-        <TrendingUp sx={{ color: 'primary.main', marginRight: 2.75 }} fontSize='small' />
-        <Typography variant='body2'>Category: {issue.category}</Typography>
+        <TrendingUp sx={{ color: 'primary.main', marginRight: 2.75, marginTop:8 }} fontSize='small' />
+        <Typography variant='body2' sx={{marginTop:8}}>Category: {issue.category}</Typography>
       </Box>
     </Box>
   </Grid>
@@ -158,6 +160,7 @@ const CardMembership = ({ issues = [] }) => {
             </Grid>
           </Grid>
         </Card>
+        </Link>
       ))}
     </>
   );

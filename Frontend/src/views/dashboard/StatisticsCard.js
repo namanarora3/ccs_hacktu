@@ -14,36 +14,33 @@ import CurrencyUsd from 'mdi-material-ui/CurrencyUsd'
 import DotsVertical from 'mdi-material-ui/DotsVertical'
 import CellphoneLink from 'mdi-material-ui/CellphoneLink'
 import AccountOutline from 'mdi-material-ui/AccountOutline'
+// ... (previous code)
 
-const salesData = [
+const issueStatusData = [
   {
-    stats: '245k',
-    title: 'Sales',
+    stats: '245',
+    title: 'Created',
     color: 'primary',
-    icon: <TrendingUp sx={{ fontSize: '1.75rem' }} />
   },
   {
-    stats: '12.5k',
-    title: 'Customers',
+    stats: '120',
+    title: 'Accepted by Authorities',
     color: 'success',
-    icon: <AccountOutline sx={{ fontSize: '1.75rem' }} />
   },
   {
-    stats: '1.54k',
+    stats: '80',
+    title: 'In Process',
     color: 'warning',
-    title: 'Products',
-    icon: <CellphoneLink sx={{ fontSize: '1.75rem' }} />
   },
   {
-    stats: '$88k',
+    stats: '45',
+    title: 'Problem is Fixed',
     color: 'info',
-    title: 'Revenue',
-    icon: <CurrencyUsd sx={{ fontSize: '1.75rem' }} />
   }
-]
+];
 
 const renderStats = () => {
-  return salesData.map((item, index) => (
+  return issueStatusData.map((item, index) => (
     <Grid item xs={12} sm={3} key={index}>
       <Box key={index} sx={{ display: 'flex', alignItems: 'center' }}>
         <Avatar
@@ -57,7 +54,8 @@ const renderStats = () => {
             backgroundColor: `${item.color}.main`
           }}
         >
-          {item.icon}
+          {/* Use icons or initials based on your preference */}
+          {item.title.charAt(0)}
         </Avatar>
         <Box sx={{ display: 'flex', flexDirection: 'column' }}>
           <Typography variant='caption'>{item.title}</Typography>
@@ -65,14 +63,14 @@ const renderStats = () => {
         </Box>
       </Box>
     </Grid>
-  ))
+  ));
 }
 
-const StatisticsCard = () => {
+const IssueStatusCard = () => {
   return (
     <Card>
       <CardHeader
-        title='Statistics Card'
+        title='Issue Status'
         action={
           <IconButton size='small' aria-label='settings' className='card-more-options' sx={{ color: 'text.secondary' }}>
             <DotsVertical />
@@ -81,9 +79,9 @@ const StatisticsCard = () => {
         subheader={
           <Typography variant='body2'>
             <Box component='span' sx={{ fontWeight: 600, color: 'text.primary' }}>
-              Total 48.5% growth
+              Total Issues
             </Box>{' '}
-            😎 this month
+            😎 by status
           </Typography>
         }
         titleTypographyProps={{
@@ -103,4 +101,4 @@ const StatisticsCard = () => {
   )
 }
 
-export default StatisticsCard
+export default IssueStatusCard;

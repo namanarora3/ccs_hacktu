@@ -1,45 +1,40 @@
 // ** Icon imports
-import Login from 'mdi-material-ui/Login'
-import Table from 'mdi-material-ui/Table'
-import CubeOutline from 'mdi-material-ui/CubeOutline'
-import HomeOutline from 'mdi-material-ui/HomeOutline'
-import FormatLetterCase from 'mdi-material-ui/FormatLetterCase'
-import AccountCogOutline from 'mdi-material-ui/AccountCogOutline'
-import CreditCardOutline from 'mdi-material-ui/CreditCardOutline'
-import AccountPlusOutline from 'mdi-material-ui/AccountPlusOutline'
-import AlertCircleOutline from 'mdi-material-ui/AlertCircleOutline'
-import GoogleCirclesExtended from 'mdi-material-ui/GoogleCirclesExtended'
+import LoginIcon from 'mdi-material-ui/Login'
+import TableIcon from 'mdi-material-ui/Table'
+import CubeOutlineIcon from 'mdi-material-ui/CubeOutline'
+import HomeOutlineIcon from 'mdi-material-ui/HomeOutline'
+import FormatLetterCaseIcon from 'mdi-material-ui/FormatLetterCase'
+import AccountCogOutlineIcon from 'mdi-material-ui/AccountCogOutline'
+import CreditCardOutlineIcon from 'mdi-material-ui/CreditCardOutline'
+import AccountPlusOutlineIcon from 'mdi-material-ui/AccountPlusOutline'
+import AlertCircleOutlineIcon from 'mdi-material-ui/AlertCircleOutline'
+import GoogleCirclesExtendedIcon from 'mdi-material-ui/GoogleCirclesExtended'
 
-const navigation = () => {
-  return [
+const navigation = (userRole) => {
+  const commonItems = [
     {
       title: 'Dashboard',
-      icon: HomeOutline,
+      icon: HomeOutlineIcon,
       path: '/'
-    },
-    {
-      title: 'Account Settings',
-      icon: AccountCogOutline,
-      path: '/account-settings'
     },
     {
       sectionTitle: 'Pages'
     },
     {
       title: 'Login',
-      icon: Login,
+      icon: LoginIcon,
       path: '/pages/login',
       openInNewTab: true
     },
     {
       title: 'Register',
-      icon: AccountPlusOutline,
+      icon: AccountPlusOutlineIcon,
       path: '/pages/register',
       openInNewTab: true
     },
     {
       title: 'Error',
-      icon: AlertCircleOutline,
+      icon: AlertCircleOutlineIcon,
       path: '/pages/error',
       openInNewTab: true
     },
@@ -48,45 +43,50 @@ const navigation = () => {
     },
     {
       title: 'Add Issue',
-      icon: FormatLetterCase,
+      icon: FormatLetterCaseIcon,
       path: '/add-issue'
     },
     {
       title: 'Map View',
-      icon: FormatLetterCase,
+      icon: CubeOutlineIcon,
       path: '/map-view'
     },
     {
       title: 'Forum',
-      icon: FormatLetterCase,
+      icon: GoogleCirclesExtendedIcon,
       path: '/forum'
     },
     {
-      title: 'Typography',
-      icon: FormatLetterCase,
-      path: '/typography'
+      title: 'Alert Display',
+      icon: FormatLetterCaseIcon,
+      path: '/alert-display'
     },
     {
-      title: 'Icons',
-      path: '/icons',
-      icon: GoogleCirclesExtended
+      title: 'Create Alert',
+      icon: FormatLetterCaseIcon,
+      path: '/alert'
     },
+  ];
+
+  const adminItems = [
+    // Add admin-specific items here
     {
-      title: 'Cards',
-      icon: CreditCardOutline,
-      path: '/cards'
+      title: 'Admin Page',
+      icon: AccountCogOutlineIcon,
+      path: '/admin-page'
     },
+  ];
+
+  const userItems = [
+    // Add user-specific items here
     {
-      title: 'Tables',
-      icon: Table,
-      path: '/tables'
+      title: 'User Page',
+      icon: CreditCardOutlineIcon,
+      path: '/user-page'
     },
-    {
-      icon: CubeOutline,
-      title: 'Form Layouts',
-      path: '/form-layouts'
-    }
-  ]
+  ];
+
+  return [...commonItems, ...(userRole === 'admin' ? adminItems : userItems)];
 }
 
-export default navigation
+export default navigation;
