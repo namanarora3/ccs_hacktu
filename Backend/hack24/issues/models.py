@@ -7,6 +7,7 @@ CATEGORY_CHOICES = (
   ('infra', 'infrastructure issues'),
   ('electrical', 'electrical issues'),
   ('social_justice', 'social_justice'),
+  ('other', 'other')
 )
 class issue(models.Model):
   title = models.CharField(max_length=255)
