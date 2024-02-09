@@ -9,6 +9,12 @@ CATEGORY_CHOICES = (
   ('social_justice', 'social_justice'),
   ('other', 'other')
 )
+STATUS_CHOICES = (
+  (1, "Created"),
+  (2, "Accepted by Authorities"),
+  (3, "In Process"),
+  (4, "Problem is fixed")
+)
 class Issue(models.Model):
   title = models.CharField(max_length=255)
   description = models.TextField(null=True, blank=True)
@@ -22,6 +28,7 @@ class Issue(models.Model):
   long = models.DecimalField(max_digits=19, decimal_places=16)
   lat  = models.DecimalField(max_digits=19, decimal_places=16)
   likes = models.ManyToManyField(CustomUser, related_name='issue_like')
+  status = models.IntegerField(choices=STATUS_CHOICES,  default=1)
 
   def number_of_likes(self):
       return self.likes.count()

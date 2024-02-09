@@ -8,6 +8,7 @@ from rest_framework.response import Response
 from .serializers import IssueSerializer, CommentSerializer
 from rest_framework import status
 from django.shortcuts import get_object_or_404
+from hack24.permissions import *
 # Create your views here.
 class issueView(generics.ListCreateAPIView):
   permission_classes = [IsAuthenticated]
@@ -84,6 +85,14 @@ class commentView(APIView):
       return Response({'status':"success", "data":serializer.data}, status=status.HTTP_201_CREATED)
 
 
-class Likepost(APIView):
-  None
+class updateStatusView(APIView):
+  permission_classes = [IsAuthenticated, IsOfficial]
+  authentication_classes = [TokenAuthentication]
+
+  def post(self, request, pk):
+    issue = Issue.objects.get(id=pk)
+    level = request.data.get('level')
+    issue.status = level
+    issue.save()
+    return Response({"status":"success", "new level":issue.status}, status=status.HTTP_200_OK)
 
