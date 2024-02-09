@@ -63,6 +63,28 @@ const LoginPage = () => {
     password: '',
     showPassword: false
   })
+  // const router = useRouter();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const response = await fetch('http://127.0.0.1:8001/auth/login/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',        
+      },
+      body: JSON.stringify({ email, password }),
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      localStorage.setItem('token', data.Token);
+      router.push('/');
+    } else {
+      console.error('Error occurred:', response.statusText);
+    }
+  };
 
   // ** Hook
   const theme = useTheme()
@@ -163,15 +185,15 @@ const LoginPage = () => {
             </Typography>
             <Typography variant='body2'>Please sign-in to your account and start the adventure</Typography>
           </Box>
-          <form noValidate autoComplete='off' onSubmit={e => e.preventDefault()}>
-            <TextField autoFocus fullWidth id='email' label='Email' sx={{ marginBottom: 4 }} />
+          <form noValidate autoComplete='off' onSubmit={handleSubmit}>
+            <TextField autoFocus fullWidth id='email' label='Email' value={email} sx={{ marginBottom: 4 }} onChange={(e) => setEmail(e.target.value)} />
             <FormControl fullWidth>
               <InputLabel htmlFor='auth-login-password'>Password</InputLabel>
               <OutlinedInput
                 label='Password'
-                value={values.password}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 id='auth-login-password'
-                onChange={handleChange('password')}
                 type={values.showPassword ? 'text' : 'password'}
                 endAdornment={
                   <InputAdornment position='end'>
@@ -199,8 +221,8 @@ const LoginPage = () => {
               fullWidth
               size='large'
               variant='contained'
+              type="submit"
               sx={{ marginBottom: 7 }}
-              onClick={() => router.push('/')}
             >
               Login
             </Button>
