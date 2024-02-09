@@ -9,7 +9,7 @@ CATEGORY_CHOICES = (
   ('social_justice', 'social_justice'),
   ('other', 'other')
 )
-class issue(models.Model):
+class Issue(models.Model):
   title = models.CharField(max_length=255)
   description = models.TextField(null=True, blank=True)
   user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
@@ -21,15 +21,20 @@ class issue(models.Model):
   # status =
   long = models.DecimalField(max_digits=19, decimal_places=16)
   lat  = models.DecimalField(max_digits=19, decimal_places=16)
+  likes = models.ManyToManyField(CustomUser, related_name='issue_like')
+
+  def number_of_likes(self):
+      return self.likes.count()
+
   def __str__(obj):
     return obj.title+" by "+obj.user.name
 
-class comment(models.Model):
-  issue = models.ForeignKey(issue, on_delete=models.CASCADE)
+class Comment(models.Model):
+  issue = models.ForeignKey(Issue, on_delete=models.CASCADE)
   content = models.TextField()
   user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
   created = models.DateTimeField(auto_now_add=True)
 
-class image(models.Model):
-  issue = models.ForeignKey(issue, on_delete=models.CASCADE, related_name="issue_images")
+class Image(models.Model):
+  issue = models.ForeignKey(Issue, on_delete=models.CASCADE, related_name="issue_images")
   image = models.ImageField(upload_to='images/issues/')
