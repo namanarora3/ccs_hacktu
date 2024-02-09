@@ -27,7 +27,7 @@ class Issue(models.Model):
   # status =
   long = models.DecimalField(max_digits=19, decimal_places=16)
   lat  = models.DecimalField(max_digits=19, decimal_places=16)
-  likes = models.ManyToManyField(CustomUser, related_name='issue_like')
+  likes = models.ManyToManyField(CustomUser, related_name='issue_like', null=True, blank=True)
   status = models.IntegerField(choices=STATUS_CHOICES,  default=1)
 
   def number_of_likes(self):
