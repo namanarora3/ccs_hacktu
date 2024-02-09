@@ -13,7 +13,9 @@ import AccountOutline from 'mdi-material-ui/AccountOutline';
 import LockOpenOutline from 'mdi-material-ui/LockOpenOutline';
 import Avatar from '@mui/material/Avatar';
 import { Heart, ShareVariant } from 'mdi-material-ui';
-
+import { DiscussionEmbed } from 'disqus-react';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
 
 // Styled Box component
 const StyledBox = styled(Box)(({ theme }) => ({
@@ -23,6 +25,20 @@ const StyledBox = styled(Box)(({ theme }) => ({
 }));
 
 const CardMembership = ({ issues = [] }) => {
+  const [comments, setComments] = React.useState({});
+
+  const handleSubmit = (event, issueId) => {
+    event.preventDefault();
+    // Retrieve the comment text for the specific issue
+    const commentText = comments[issueId];
+    // Logic to submit the comment goes here
+    // Clear the input for this specific issue after submission
+    setComments(prevComments => ({
+      ...prevComments,
+      [issueId]: '', // Reset the comment text for this issue
+    }));
+  };
+
   return (
     <>
       {issues.map((issue, index) => (
@@ -61,8 +77,28 @@ const CardMembership = ({ issues = [] }) => {
                     </Box>
                   </Grid>
                 </Grid>
+                <br></br>
+                <Typography variant='h6' sx={{  }}>
+                  Add Comments
+                </Typography>
+                <form onSubmit={(e) => handleSubmit(e, index)}>
+                  <TextField
+                    fullWidth
+                    rows={4}
+                    variant="outlined"
+                    placeholder="Add a comment..."
+                    value={comments[index] || ''}
+                    onChange={(e) => setComments(prevComments => ({ ...prevComments, [index]: e.target.value }))}
+                    sx={{ width: '70%', margin: 3.5 }}
+                  />
+                  <br />
+                  <Button type="submit" variant="contained" color="primary" sx={{ margin: 3.5 }}>
+                    Submit
+                  </Button>
+                </form>
               </CardContent>
             </Grid>
+
             <Grid
               item
               sm={5}
@@ -81,34 +117,33 @@ const CardMembership = ({ issues = [] }) => {
                 }}
               >
                 <Box>
-                  <Image src= {issue.image} alt='card' />
+                  <Image src={issue.image} alt='card' />
                   <Box sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between' }}>
-          <Box sx={{ mr: 2, display: 'flex', alignItems: 'center' }}>
-            <Avatar alt='Mary Vaughn' src='/images/avatars/4.png' sx={{ width: 34, height: 34, marginRight: 2.75 }} />
-            <Typography variant='body2' sx={{ color: 'common.black' }}>
-              Mary Vaughn
-            </Typography>
-          </Box>
-          <Box sx={{ display: 'flex', alignItems: 'center' }}>
-            <Box sx={{ display: 'flex', alignItems: 'center', mr: 3.5 }}>
-              <Heart sx={{ marginRight: 1.25 }} />
-              <Typography variant='body2' sx={{ color: 'common.black' }}>
-                1.2k
-              </Typography>
-            </Box>
-            <Box sx={{ display: 'flex', alignItems: 'center' }}>
-              <ShareVariant sx={{ marginRight: 1.25 }} />
-              <Typography variant='body2' sx={{ color: 'common.black' }}>
-                80
-              </Typography>
-            </Box>
-          </Box>
-        </Box>
+                    <Box sx={{ mr: 2, display: 'flex', alignItems: 'center' }}>
+                      <Avatar alt='Mary Vaughn' src='/images/avatars/4.png' sx={{ width: 34, height: 34, marginRight: 2.75 }} />
+                      <Typography variant='body2' sx={{ color: 'common.black' }}>
+                        Mary Vaughn
+                      </Typography>
+                    </Box>
+                    <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                      <Box sx={{ display: 'flex', alignItems: 'center', mr: 3.5 }}>
+                        <Heart sx={{ marginRight: 1.25 }} />
+                        <Typography variant='body2' sx={{ color: 'common.black' }}>
+                          1.2k
+                        </Typography>
+                      </Box>
+                      <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                        <ShareVariant sx={{ marginRight: 1.25 }} />
+                        <Typography variant='body2' sx={{ color: 'common.black' }}>
+                          80
+                        </Typography>
+                      </Box>
+                    </Box>
+                  </Box>
                 </Box>
               </CardContent>
             </Grid>
           </Grid>
-         
         </Card>
       ))}
     </>
