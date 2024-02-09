@@ -1,3 +1,6 @@
+// ADMIN SIDE
+
+
 import Grid from '@mui/material/Grid';
 import React, { useState } from 'react';
 import TextField from '@mui/material/TextField';
@@ -17,23 +20,22 @@ import MapComponent from 'src/components/MapComponent';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 
-
-
 // Assuming you have a component for displaying a map
 
 // Import styles for third-party libraries
 import 'react-datepicker/dist/react-datepicker.css';
 
 const Alert = () => {
-  // Sample categories for the dropdown
-  const categories = ['Category  1', 'Category  2', 'Category  3'];
-
+  const alertData = {
+    title: '',
+    date: '',
+    description: '',
+  };
   // State for selected date
   const [selectedDate, handleDateChange] = React.useState(new Date());
 
   // State for selected image
   const [selectedImage, setSelectedImage] = React.useState(null);
-  const [imagePreview, setImagePreview] = useState(null);
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -55,60 +57,26 @@ const Alert = () => {
       <CardContent>
       <Grid container spacing={6}>
         <Grid item xs={12} md={6}>
-          <TextField label="Title" variant="outlined" fullWidth />
+          <TextField label="Title" value={alertData.title} variant="outlined" fullWidth />
         </Grid>
-        
         <Grid item xs={12} md={6}>
-          <FormControl fullWidth variant="outlined">
-            <InputLabel id="category-label">Category</InputLabel>
-            <Select labelId="category-label" label="Category">
-              {categories.map((category) => (
-                <MenuItem key={category} value={category}>
-                  {category}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-        </Grid>
-        <Grid item xs={6} md={12}>
-          <TextField label="Description" variant="outlined" fullWidth multiline rows={4} />
-        </Grid>
-        <Grid item xs={6} md={6}>
-          <MapComponent /> 
-        </Grid>
-        <Grid item xs={6}>
-      <input
-        accept="image/*"
-        id="image-upload"
-        type="file"
-        onChange={handleFileChange}
-        style={{ display: 'none' }}
-      />
-      <label htmlFor="image-upload">
-        <Button variant="contained" component="span">
-          Upload Image
-        </Button>
-      </label>
-      {imagePreview && (
-              <div>
-                <img src={imagePreview} alt="Selected" style={{ maxWidth: '100%', maxHeight: '200px', marginTop: '10px' }} />
-              </div>
-            )}
-      {selectedImage && <p>Selected Image: {selectedImage.name}</p>}
-      {/* You can display a preview of the selected image here if needed */} 
-
-      
-    </Grid>
-        <Grid item xs={12}>
+          {/* date */}
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <DatePicker
               label="Date"
-              value={selectedDate}
+              // value={selectedDate}
+              value={alertData.date}
               onChange={handleDateChange}
               renderInput={(params) => <TextField {...params} />}
             />
           </LocalizationProvider>
         </Grid>
+        
+        
+        <Grid item xs={6} md={12}>
+          <TextField label="Description" value={alertData.description} variant="outlined" fullWidth multiline rows={4} />
+        </Grid>
+        
       </Grid>
         </CardContent>
         <Divider sx={{ margin: 0 }} />

@@ -154,7 +154,7 @@ const CommentSection =() => {
                 placeholder="Add a comment..."
                 value={comments}
                 onChange={(e) => setComments(e.target.value)}
-                sx={{ width: '70%', marginBottom: 3.5 }}
+                sx={{ width: '70%', marginBottom: 5.5 }}
               />
               <br />
               <Button type="submit" variant="contained" color="primary" sx={{  }}>
