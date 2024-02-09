@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import { useLoadScript, GoogleMap, Marker } from '@react-google-maps/api';
+import Card from '@mui/material/Box';
 
 const MapView = () => {
   const libraries = useMemo(() => ['places'], []);
@@ -76,9 +77,9 @@ const MapView = () => {
           />
         ))}
       </GoogleMap>
-
+      <Card>
       {selectedIssue && (
-        <div style={{ marginLeft: '20px' }}>
+        <div style={{ marginLeft: '20px', width:"50%"}}>
           <h2>{selectedIssue.title}</h2>
           <p>{selectedIssue.description}</p>
           <p>Category: {selectedIssue.category}</p>
@@ -86,6 +87,7 @@ const MapView = () => {
           <img src={selectedIssue.image} alt={selectedIssue.title} style={{ maxWidth: '100%', maxHeight: '300px' }} />
         </div>
       )}
+      </Card>
     </div>
   );
 };
