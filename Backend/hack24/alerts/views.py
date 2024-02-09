@@ -14,7 +14,7 @@ class CreateAlert(APIView):
 
   def post(self, request):
     data = request.data.copy()
-    data.user = request.user.id
+    data['user'] = request.user.id
     serializer = AlertSerializer(data=data)
     serializer.is_valid(raise_exception=True)
     serializer.save()

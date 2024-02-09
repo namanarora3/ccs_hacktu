@@ -5,12 +5,12 @@ from .models import *
 class IssueSerializer(ModelSerializer):
   user_name = SerializerMethodField()
 
+  def get_user_name(self, obj):
+    return obj.user.name
   class Meta:
     model = issue
     fields = '__all__'
 
-  def get_user_name(self, obj):
-    return obj.user.name
 
 class CommentSerializer(ModelSerializer):
 
