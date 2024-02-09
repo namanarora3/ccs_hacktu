@@ -1,0 +1,6 @@
+Django==4.1
+Pillow==9.3.0
+# django[argon2]==4.1
+django-cors-headers==3.14.0
+djangorestframework==3.12.4
+pytz
