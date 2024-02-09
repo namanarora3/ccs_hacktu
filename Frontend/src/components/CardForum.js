@@ -18,6 +18,7 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { useState } from 'react';
 import { left } from '@popperjs/core';
+import styles from './CardForum.module.css'
 
 // Styled Box component
 const StyledBox = styled(Box)(({ theme }) => ({
@@ -88,18 +89,18 @@ const CardMembership = ({ issues = [] }) => {
               <CardContent sx={{ padding: theme => `${theme.spacing(3.25, 5.75, 6.25)} !important` }}>
               <Box sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between' }}>
                     <Box sx={{ mr: 2, display: 'flex', alignItems: 'center' }}>
-                      <Avatar alt='Name' src='/images/avatars/4.png' sx={{ width: 34, height: 34, marginRight: 2.75 }} />
-                      <Typography variant='body5' sx={{ color: 'common.black' }}>
-                       {issue.username}
+                      <Avatar alt='Name' src='/images/avatars/4.png' sx={{ width: 34, height: 34, marginRight: 2.75,marginTop: 5 }} />
+                      <Typography variant='body5' sx={{ color: 'common.black' ,marginTop:5}}>
+                       {issue.user_name}
                       </Typography>
                     </Box>
                     </Box>
                     <br></br>
                 <Typography sx={{ marginBottom: 3.5, fontSize: 20, fontWeight: 700 }}>
-                  {issue.issueName}
+                  {issue.title}
                 </Typography>
                 <Typography variant='body2'>
-                  {renderDescription(issue.issueDescription)}
+                  {renderDescription(issue.description)}
                 </Typography>
                 <Divider sx={{ marginTop: 6.5, marginBottom: 6.75 }} />
                 <Grid container spacing={4}>
@@ -107,11 +108,11 @@ const CardMembership = ({ issues = [] }) => {
     <StyledBox>
       <Box sx={{ mb: 6.75, display: 'flex', alignItems: 'center' }}>
         <LockOpenOutline sx={{ color: 'primary.main', marginRight: 2.75 }} fontSize='small' />
-        <Typography variant='body2'>LOCATION: {issue.location}</Typography>
+        <Typography variant='body2'>LOCATION: {issue.long}</Typography>
       </Box>
       <Box sx={{ display: 'flex', alignItems: 'center' }}>
         <AccountOutline sx={{ color: 'primary.main', marginRight: 2.75 }} fontSize='small' />
-        <Typography variant='body2'>DATE: {issue.date}</Typography>
+        <Typography variant='body2'>DATE: {issue.created}</Typography>
       </Box>
     </StyledBox>
   </Grid>
@@ -151,9 +152,7 @@ const CardMembership = ({ issues = [] }) => {
                 }}
               >
                 <Box>
-                  <Image src={issue.image} alt='card' />
-                  
-                    
+                  <Image className={styles.img1} src={issue.image} alt='card' width={'500%'} height={'400%'}/>
                 </Box>
               </CardContent>
             </Grid>

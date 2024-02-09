@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect  } from 'react';
 import CardMembership from '../../components/CardForum';
 import Garbage from '../../../public/images/rimjhim/garbage.png';
 import {
@@ -12,39 +12,6 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
-
-const issuesData = [
-    {
-      issueName: 'Garbage Collection Issue',
-      issueDescription: 'I am writing to bring to your attention a pressing issue that affects our community deeply - the improper disposal of garbage in public areas. It has come to my attention, as well as that of many concerned citizens, that our streets, parks, and other public spaces are increasingly becoming dumping grounds for waste and litter. This irresponsible disposal of garbage not only poses a significant threat to public health but also tarnishes the beauty of our neighborhoods and harms the environment. The accumulation of garbage leads to foul odors, attracts pests and vermin, and creates breeding grounds for diseases. Furthermore, it contributes to pollution of our waterways and soil, endangering the delicate ecological balance upon which our ecosystem relies. As residents who take pride in our community, we find it unacceptable that our public spaces are being treated with such disregard. It is imperative that immediate action be taken to address this issue and implement effective waste management solutions.',
-      location: 'Location A',
-      date: '2024-02-09',
-      upvoteCount: 10,
-      category: 'garbage',
-      image: Garbage, 
-      username: 'Manoj Kumar'
-    }, 
-    {
-      issueName: 'Second Issue',
-      issueDescription: 'I am writing to bring to your attention a pressing issue that affects our community deeply - the improper disposal of garbage in public areas. It has come to my attention, as well as that of many concerned citizens, that our streets, parks, and other public spaces are increasingly becoming dumping grounds for waste and litter. This irresponsible disposal of garbage not only poses a significant threat to public health but also tarnishes the beauty of our neighborhoods and harms the environment. The accumulation of garbage leads to foul odors, attracts pests and vermin, and creates breeding grounds for diseases. Furthermore, it contributes to pollution of our waterways and soil, endangering the delicate ecological balance upon which our ecosystem relies. As residents who take pride in our community, we find it unacceptable that our public spaces are being treated with such disregard. It is imperative that immediate action be taken to address this issue and implement effective waste management solutions.',
-      location: 'Location b',
-      date: '2024-02-10',
-      upvoteCount: 120,
-      category: 'electricity',
-      image: Garbage, 
-      username: 'Manoj Kumar'
-    }, 
-    {
-      issueName: 'Third Issue',
-      issueDescription: 'I am writing to bring to your attention a pressing issue that affects our community deeply - the improper disposal of garbage in public areas. It has come to my attention, as well as that of many concerned citizens, that our streets, parks, and other public spaces are increasingly becoming dumping grounds for waste and litter. This irresponsible disposal of garbage not only poses a significant threat to public health but also tarnishes the beauty of our neighborhoods and harms the environment. The accumulation of garbage leads to foul odors, attracts pests and vermin, and creates breeding grounds for diseases. Furthermore, it contributes to pollution of our waterways and soil, endangering the delicate ecological balance upon which our ecosystem relies. As residents who take pride in our community, we find it unacceptable that our public spaces are being treated with such disregard. It is imperative that immediate action be taken to address this issue and implement effective waste management solutions.',
-      location: 'Location c',
-      date: '2024-02-11',
-      upvoteCount: 100,
-      category: 'railway',
-      image: Garbage ,
-      username: 'Manoj Kumar'
-    }
-  ];
 
 function Forum() {
   const [filter, setFilter] = useState({
@@ -68,6 +35,28 @@ function Forum() {
       upvotes: newValue,
     }));
   };
+
+  const [issues, setIssues] = useState([]);
+  const fetchData = async () => {
+    const token=localStorage.getItem('token')
+    try {
+      const response = await fetch('http://127.0.0.1:8001/issue/',{
+        headers:{
+          'Authorization':`Token ${token}`,
+          'Content-Type':'application/json'
+        }
+      });
+      if (!response.ok) {
+        throw new Error('Failed to fetch data');
+      }
+      const jsonData = await response.json();
+      setIssues(jsonData);
+      console.log(data)
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+useEffect(() => {fetchData()}, []);
 
   return (
     <>
@@ -121,9 +110,9 @@ function Forum() {
           sx={{ width: 200 }}
         />
       </Box>
-      <CardMembership issues={issuesData.filter((issue) => {
+      <CardMembership issues={issues.filter((issue) => {
         return (
-          issue.upvoteCount >= filter.upvotes &&
+          // issue.upvoteCount >= filter.upvotes &&
           (filter.category === '' || issue.category === filter.category) &&
           (filter.location === '' || issue.location === filter.location) &&
           (filter.date === '' || issue.date === filter.date)
