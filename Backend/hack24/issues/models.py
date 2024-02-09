@@ -7,6 +7,7 @@ CATEGORY_CHOICES = (
   ('infra', 'infrastructure issues'),
   ('electrical', 'electrical issues'),
   ('social_justice', 'social_justice'),
+  ('other', 'other')
 )
 class issue(models.Model):
   title = models.CharField(max_length=255)
@@ -20,6 +21,8 @@ class issue(models.Model):
   # status =
   # long = models.DecimalField(max_digits=9, decimal_places=6)
   # lat  = models.DecimalField(max_digits=9, decimal_places=6)
+  def __str__(obj):
+    return obj.title+" by "+obj.user.name
 
 class comment(models.Model):
   issue = models.ForeignKey(issue, on_delete=models.CASCADE)

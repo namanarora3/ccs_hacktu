@@ -18,12 +18,13 @@ import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 
 
+
 // Assuming you have a component for displaying a map
 
 // Import styles for third-party libraries
 import 'react-datepicker/dist/react-datepicker.css';
 
-const AddIssueForm = () => {
+const Alert = () => {
   // Sample categories for the dropdown
   const categories = ['Category  1', 'Category  2', 'Category  3'];
 
@@ -34,11 +35,10 @@ const AddIssueForm = () => {
   const [selectedImage, setSelectedImage] = React.useState(null);
   const [imagePreview, setImagePreview] = useState(null);
 
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    setImage(file);
-    // setSelectedImage(file);
-    // setImagePreview(URL.createObjectURL(file));
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    setSelectedImage(file);
+    setImagePreview(URL.createObjectURL(file));
   };
 
   const handleUpload = () => {
@@ -47,59 +47,21 @@ const AddIssueForm = () => {
     
   };
 
-  const [title, setTitle] = useState('');
-  const [category, setCategory] = useState('');
-  const [description, setDescription] = useState('');
-  const [image, setImage] = useState(null);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const formData = new FormData();
-    formData.append('title', title);
-    formData.append('category', category);
-    formData.append('description', description);
-    formData.append('image', image);
-    // const formData = {
-    //   title: title,
-    //   category: category,
-    //   description: description,
-    //   image: imagePreview
-    // };
-    const token = localStorage.getItem('token');
-      const response = await fetch('http://127.0.0.1:8001/issue/', {
-        method: 'POST',
-        headers: {
-          'Authorization':`Token ${token}`
-          // 'Content-Type': 'multipart/form-data'
-        },
-        body: formData
-      });
-      console.log(formData.image)
-
-      if (response.ok) {
-        const data = await response.json();
-        console.log('Response from API:', data);
-      } else {
-        console.error('Error occurred:', response);
-      }
-    };
-
   return (
     <Card>
-      <CardHeader title='Add Issue' titleTypographyProps={{ variant: 'h6' }} />
+      <CardHeader title='Add An Alert!' titleTypographyProps={{ variant: 'h4' }} />
       <Divider sx={{ margin: 0 }} />
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={e => e.preventDefault()}>
       <CardContent>
       <Grid container spacing={6}>
         <Grid item xs={12} md={6}>
-          <TextField label="Title" variant="outlined" fullWidth value={title} onChange={(e) => setTitle(e.target.value)} />
+          <TextField label="Title" variant="outlined" fullWidth />
         </Grid>
         
         <Grid item xs={12} md={6}>
           <FormControl fullWidth variant="outlined">
             <InputLabel id="category-label">Category</InputLabel>
-            <Select labelId="category-label" label="Category" value={category} onChange={(e) => setCategory(e.target.value)}>
+            <Select labelId="category-label" label="Category">
               {categories.map((category) => (
                 <MenuItem key={category} value={category}>
                   {category}
@@ -109,7 +71,7 @@ const AddIssueForm = () => {
           </FormControl>
         </Grid>
         <Grid item xs={6} md={12}>
-          <TextField label="Description" variant="outlined" fullWidth multiline rows={4} value={description} onChange={(e) => setDescription(e.target.value)} />
+          <TextField label="Description" variant="outlined" fullWidth multiline rows={4} />
         </Grid>
         <Grid item xs={6} md={6}>
           <MapComponent /> 
@@ -137,6 +99,16 @@ const AddIssueForm = () => {
 
       
     </Grid>
+        <Grid item xs={12}>
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <DatePicker
+              label="Date"
+              value={selectedDate}
+              onChange={handleDateChange}
+              renderInput={(params) => <TextField {...params} />}
+            />
+          </LocalizationProvider>
+        </Grid>
       </Grid>
         </CardContent>
         <Divider sx={{ margin: 0 }} />
@@ -150,4 +122,4 @@ const AddIssueForm = () => {
   );
 };
 
-export default AddIssueForm;
+export default Alert;
