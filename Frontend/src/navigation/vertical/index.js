@@ -17,11 +17,11 @@ const navigation = () => {
       icon: HomeOutline,
       path: '/'
     },
-    {
-      title: 'Account Settings',
-      icon: AccountCogOutline,
-      path: '/account-settings'
-    },
+    // {
+    //   title: 'Account Settings',
+    //   icon: AccountCogOutline,
+    //   path: '/account-settings'
+    // },
     {
       sectionTitle: 'Pages'
     },
