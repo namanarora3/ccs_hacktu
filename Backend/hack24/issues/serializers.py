@@ -12,3 +12,9 @@ class IssueSerializer(ModelSerializer):
   def get_user_name(self, obj):
     return obj.user.name
 
+class CommentSerializer(ModelSerializer):
+
+  class Meta:
+    model = comment
+    fields = '__all__'
+

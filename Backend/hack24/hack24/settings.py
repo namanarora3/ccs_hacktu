@@ -42,8 +42,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'users',
     'issues',
+    'alerts',
     'rest_framework.authtoken',
     'corsheaders',
+    'rest_framework',
 ]
 
 AUTH_USER_MODEL = "users.CustomUser"
@@ -76,6 +78,11 @@ TEMPLATES = [
         },
     },
 ]
+# REST_FRAMEWORK = {
+#     'DEFAULT_RENDERER_CLASSES': [
+#         'rest_framework.renderers.JSONRenderer',
+#     ]
+# }
 
 WSGI_APPLICATION = 'hack24.wsgi.application'
 CSRF_TRUSTED_ORIGINS = ['http://localhost:3000']
@@ -146,3 +153,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # MEDIA_URL = '/media/'
 # MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 # and add _ to urlpatterns- + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# cors policy changes in installed apps, middleware, and values
+# add rest_framework to installed apps
