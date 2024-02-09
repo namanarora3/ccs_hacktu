@@ -66,7 +66,6 @@ useEffect(() => {fetchData()}, []);
     <div>
       <Box sx={{ marginBottom: 2 }}>
         <TextField
-          label="Date"
           type="date"
           name="date"
           value={filter.date}
@@ -89,26 +88,15 @@ useEffect(() => {fetchData()}, []);
             onChange={handleFilterChange}
           >
             <MenuItem value="">All</MenuItem>
-            <MenuItem value="category1">railway</MenuItem>
-            <MenuItem value="category2">electricity</MenuItem>
-            <MenuItem value="category2">roadways</MenuItem>
-            <MenuItem value="category2">garbage</MenuItem> 
-            <MenuItem value="category2">water</MenuItem>
-            <MenuItem value="category2">other</MenuItem>
+            <MenuItem value="water">water</MenuItem>
+            <MenuItem value="infra">infra</MenuItem>
+            <MenuItem value="electrical">electrical</MenuItem>
+            <MenuItem value="social_justice">social_justice</MenuItem> 
+            <MenuItem value="other">other</MenuItem>
             
             {/* Add more categories */}
           </Select>
         </FormControl>
-        <Slider
-          value={filter.upvotes}
-          onChange={handleSliderChange}
-          aria-labelledby="upvotes-slider"
-          min={0}
-          max={100}
-          step={1}
-          valueLabelDisplay="auto"
-          sx={{ width: 200 }}
-        />
       </Box>
       <CardMembership issues={issues.filter((issue) => {
         return (
