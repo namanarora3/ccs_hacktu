@@ -81,6 +81,7 @@ function Forum() {
           onChange={handleFilterChange}
           sx={{ marginRight: 2 }}
         />
+
         <TextField
           label="Location"
           name="location"
