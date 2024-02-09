@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'users',
     'issues',
     'rest_framework.authtoken',
-    'cosheaders',
+    'corsheaders',
 ]
 
 AUTH_USER_MODEL = "users.CustomUser"
