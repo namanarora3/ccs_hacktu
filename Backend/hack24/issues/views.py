@@ -21,6 +21,16 @@ class issueView(generics.ListCreateAPIView):
     request.data['user'] = user.id
     return super().post(request, *args, **kwargs)
 
+class issueDetailView(APIView):
+  permission_classes = [IsAuthenticated]
+  authentication_classes = [TokenAuthentication]
+
+  def get(self, request, pk):
+    obj = get_object_or_404(Issue, id=pk)
+    serializer = IssueSerializer(obj, context={'request': request})
+    return Response({"data":serializer.data}, status=status.HTTP_200_OK)
+
+
 # class commentView(generics.ListCreateAPIView):
 #   permission_classes = [IsAuthenticated]
 #   authentication_classes = [TokenAuthentication]
