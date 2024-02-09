@@ -25,12 +25,12 @@ const navigation = () => {
     // {
     //   sectionTitle: 'Pages'
     // },
-    // {
-    //   title: 'Login',
-    //   icon: Login,
-    //   path: '/pages/login',
-    //   openInNewTab: true
-    // },
+    {
+      title: 'Login',
+      icon: Login,
+      path: '/pages/login',
+      openInNewTab: true
+    },
     // {
     //   title: 'Register',
     //   icon: AccountPlusOutline,

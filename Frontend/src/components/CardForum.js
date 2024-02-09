@@ -59,7 +59,7 @@ const CardMembership = ({ issues = [] }) => {
 
   // Function to determine if the description is longer than the limit
   const isDescriptionLong = (description) => {
-    const words = description.split(' ');
+    const words = description?.split(' ');
     return words.length >  60;
   };
 
