@@ -38,24 +38,24 @@ function Forum() {
 
   const [issues, setIssues] = useState([]);
   const fetchData = async () => {
-    const token=localStorage.getItem('token')
-    try {
-      const response = await fetch('http://127.0.0.1:8001/issue/',{
-        headers:{
-          'Authorization':`Token ${token}`,
-          'Content-Type':'application/json'
-        }
-      });
-      if (!response.ok) {
-        throw new Error('Failed to fetch data');
+  const token = localStorage.getItem('token');
+  try {
+    const response = await fetch('http://127.0.0.1:8001/issue/', {
+      headers: {
+        'Authorization': `Token ${token}`,
+        'Content-Type': 'application/json'
       }
-      const jsonData = await response.json();
-      setIssues(jsonData);
-      console.log(data)
-    } catch (error) {
-      console.error('Error fetching data:', error);
+    });
+    if (!response.ok) {
+      throw new Error('Failed to fetch data');
     }
-  };
+    const jsonData = await response.json();
+    setIssues(jsonData);
+    console.log(jsonData); // Corrected to log jsonData
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
+};
 useEffect(() => {fetchData()}, []);
 
   return (

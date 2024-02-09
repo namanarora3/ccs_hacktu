@@ -42,7 +42,7 @@ const AppBarContent = props => {
                 <Magnify fontSize='small' />
               </InputAdornment>
             )
-          }}
+          }} 
         />
       </Box>
       <Box className='actions-right' sx={{ display: 'flex', alignItems: 'center' }}>
