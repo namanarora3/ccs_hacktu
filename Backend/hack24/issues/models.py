@@ -19,8 +19,8 @@ class issue(models.Model):
   # likes =
   # dislikes =
   # status =
-  # long = models.DecimalField(max_digits=9, decimal_places=6)
-  # lat  = models.DecimalField(max_digits=9, decimal_places=6)
+  long = models.DecimalField(max_digits=19, decimal_places=16)
+  lat  = models.DecimalField(max_digits=19, decimal_places=16)
   def __str__(obj):
     return obj.title+" by "+obj.user.name
 
