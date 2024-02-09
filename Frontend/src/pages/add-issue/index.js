@@ -16,6 +16,8 @@ import CardHeader from '@mui/material/CardHeader';
 import MapComponent from 'src/components/MapComponent';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
+import { GoogleMap, Marker, LoadScript } from '@react-google-maps/api';
+const apiKey = process.env.NEXT_PUBLIC_API_KEY;
 
 
 // Assuming you have a component for displaying a map
@@ -25,7 +27,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 
 const AddIssueForm = () => {
   // Sample categories for the dropdown
-  const categories = ['Category  1', 'Category  2', 'Category  3'];
+  const categories = ['water','infra','electrical','social_justice','other'];
 
   // State for selected date
   const [selectedDate, handleDateChange] = React.useState(new Date());
@@ -37,8 +39,8 @@ const AddIssueForm = () => {
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     setImage(file);
-    // setSelectedImage(file);
-    // setImagePreview(URL.createObjectURL(file));
+    setSelectedImage(file);
+    setImagePreview(URL.createObjectURL(file));
   };
 
   const handleUpload = () => {
@@ -57,15 +59,11 @@ const AddIssueForm = () => {
 
     const formData = new FormData();
     formData.append('title', title);
-    formData.append('category', category);
+    formData.append('category', "infra");
     formData.append('description', description);
     formData.append('image', image);
-    // const formData = {
-    //   title: title,
-    //   category: category,
-    //   description: description,
-    //   image: imagePreview
-    // };
+    formData.append('lat',selectedLocation.lat );
+    formData.append('long', selectedLocation.lng);
     const token = localStorage.getItem('token');
       const response = await fetch('http://127.0.0.1:8001/issue/', {
         method: 'POST',
@@ -75,14 +73,22 @@ const AddIssueForm = () => {
         },
         body: formData
       });
-      console.log(formData.image)
 
       if (response.ok) {
         const data = await response.json();
-        console.log('Response from API:', data);
+        console.log(response)
       } else {
         console.error('Error occurred:', response);
       }
+    };
+
+    const [selectedLocation, setSelectedLocation] = useState({lat:30.340000,lng:76.379997});
+
+    const handleMapClick = (event) => {
+      setSelectedLocation({
+        lat: event.latLng.lat(),
+        lng: event.latLng.lng()
+      });
     };
 
   return (
@@ -112,7 +118,20 @@ const AddIssueForm = () => {
           <TextField label="Description" variant="outlined" fullWidth multiline rows={4} value={description} onChange={(e) => setDescription(e.target.value)} />
         </Grid>
         <Grid item xs={6} md={6}>
-          <MapComponent /> 
+        <LoadScript googleMapsApiKey={apiKey}>
+        <GoogleMap
+          center={{ lat: 30.340000, lng: 76.379997 }}
+          zoom={15}
+          onClick={handleMapClick}
+          mapContainerStyle={{ width: '100%', height: '400px' }}
+        >
+        {selectedLocation && (
+          <Marker
+            position={{ lat: selectedLocation.lat, lng: selectedLocation.lng }}
+          />
+        )}
+      </GoogleMap>
+    </LoadScript>
         </Grid>
         <Grid item xs={6}>
       <input
