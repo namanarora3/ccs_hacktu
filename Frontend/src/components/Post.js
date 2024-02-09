@@ -26,7 +26,7 @@ const StyledBox = styled(Box)(({ theme }) => ({
   }
 }));
 
-const CardMembership = ({ issues = [] }) => {
+const PostPage = ({ issues = [] }) => {
   const [comments, setComments] = React.useState({});
   const [upvoteCounts, setUpvoteCounts] = React.useState({});
 
@@ -64,7 +64,7 @@ const CardMembership = ({ issues = [] }) => {
 
   // Render logic for the description
   const renderDescription = (description) => {
-    const limit =  70;
+    const limit =  60;
     if (!showFullDescription && isDescriptionLong(description)) {
       return (
         <>
@@ -130,7 +130,26 @@ const CardMembership = ({ issues = [] }) => {
   </Grid>
 </Grid>
 
-    </CardContent>
+                <br></br>
+                <Typography variant='h6' sx={{  }}>
+                  Add Comments
+                </Typography>
+                <form onSubmit={(e) => handleSubmit(e, index)}>
+                  <TextField
+                    fullWidth
+                    rows={4}
+                    variant="outlined"
+                    placeholder="Add a comment..."
+                    value={comments[index] || ''}
+                    onChange={(e) => setComments(prevComments => ({ ...prevComments, [index]: e.target.value }))}
+                    sx={{ width: '70%', margin: 3.5 }}
+                  />
+                  <br />
+                  <Button type="submit" variant="contained" color="primary" sx={{ margin: 3.5 }}>
+                    Submit
+                  </Button>
+                </form>
+              </CardContent>
             </Grid>
 
             <Grid
@@ -164,4 +183,4 @@ const CardMembership = ({ issues = [] }) => {
   );
 };
 
-export default CardMembership;
+export default PostPage;
