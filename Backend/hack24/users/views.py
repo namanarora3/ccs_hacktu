@@ -23,7 +23,8 @@ class LoginUser(APIView):
     serializer = LoginUserSerializer(data=data)
     if serializer.is_valid():
       user = serializer.validated_data['user']
+      admin = user.is_official
       token,_ = Token.objects.get_or_create(user=user)
-      return Response({"Status":"Success", "Token":str(token), 'email':serializer.validated_data['email']}, status=status.HTTP_200_OK)
+      return Response({"Status":"Success", "Token":str(token), 'email':serializer.validated_data['email'], 'admin':admin}, status=status.HTTP_200_OK)
     else:
       return Response(serializer.errors)
