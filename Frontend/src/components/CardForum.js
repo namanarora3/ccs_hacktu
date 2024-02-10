@@ -114,7 +114,7 @@ const CardMembership = ({ issues = [] }) => {
       </Box>
       <Box sx={{ display: 'flex', alignItems: 'center' }}>
         <AccountOutline sx={{ color: 'primary.main', marginRight: 2.75 }} fontSize='small' />
-        <Typography variant='body2'>DATE: {issue.created}</Typography>
+        <Typography variant='body2'>DATE: {new Date(issue.created).toLocaleString()}</Typography>
       </Box>
     </StyledBox>
   </Grid>
