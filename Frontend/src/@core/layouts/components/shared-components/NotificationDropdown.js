@@ -162,6 +162,7 @@ import { useState, Fragment } from 'react';
 
 // ** MUI Imports
 import Box from '@mui/material/Box';
+import Link from 'next/link';
 import Chip from '@mui/material/Chip';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
@@ -255,14 +256,12 @@ const AlertDropdown = () => {
 
   const alertDataArray = [
     {
-      title: 'Alert Title 1',
-      date: '2024-02-10',
-      description: 'Alert description goes here 1.',
+      title: 'Water Clog',
+      description: 'Water clog in my area poses a serious threat, caus…s issue and safeguard our community\'s well-being.',
     },
     {
-      title: 'Alert Title 2',
-      date: '2024-02-09',
-      description: 'Alert description goes here 2.',
+      title: 'Light Not Working',
+      description: 'Non-functional street lights in my area pose safet…ell-lit environment for residents and pedestrians',
     },
     // Add more alerts as needed
   ];
@@ -318,9 +317,11 @@ const AlertDropdown = () => {
           disableRipple
           sx={{ py: 3.5, borderBottom: 0, borderTop: theme => `1px solid ${theme.palette.divider}` }}
         >
+          <Link href="/alert-display/">
           <Button fullWidth variant='contained' onClick={handleDropdownClose}>
             View All Alerts
           </Button>
+          </Link>
         </MenuItem>
       </Menu>
     </Fragment>

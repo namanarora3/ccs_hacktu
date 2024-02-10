@@ -1,5 +1,5 @@
 // ** React Imports
-import { useState } from 'react'
+import React, { useState, useEffect  } from 'react'
 
 // ** MUI Imports
 import Paper from '@mui/material/Paper'
@@ -11,28 +11,49 @@ import TableCell from '@mui/material/TableCell'
 import TableContainer from '@mui/material/TableContainer'
 import TablePagination from '@mui/material/TablePagination'
 
-const columns = [
-  { id: 'title', label: 'Title', minWidth: 100 },
-  { id: 'date', label: 'Date', minWidth: 30 },
-  { id: 'description', label: 'Description', minWidth: 300 }
-]
-
-function createData(title, date, description) {
-  return { title, date, description }
-}
-
-const rows = [
-  createData('Title 1', '2024-02-10', 'Description 1'),
-  createData('Title 2', '2024-02-09', 'Description 2'),
-  createData('Title 3', '2024-02-08', 'Description 3'),
-  // Add more rows as needed
-]
-
 const TableStickyHeader = () => {
   // ** States
+  const columns = [
+    { id: 'title', label: 'Title', minWidth: 100 },
+    { id: 'description', label: 'Description', minWidth: 300 }
+  ]
+  
+  function createData(title, description) {
+    return { title, description }
+  }
+  const rows = [
+    // Add more rows as needed
+    createData("Water Clog","Water clog in my area poses a serious threat, caus…s issue and safeguard our community's well-being."),
+    createData("Light Not Working","Non-functional street lights in my area pose safet…ell-lit environment for residents and pedestrians")
+  ]
   const [page, setPage] = useState(0)
   const [rowsPerPage, setRowsPerPage] = useState(10)
-
+  const data= [];
+  const fetchData = async () => {
+  const token = localStorage.getItem('token');
+  try {
+    const response = await fetch('http://127.0.0.1:8001/issue/', {
+      headers: {
+        'Authorization': `Token ${token}`,
+        'Content-Type': 'application/json'
+      }
+    });
+    if (!response.ok) {
+      throw new Error('Failed to fetch data');
+    }
+    // const jsonData = await response.json();
+    data=await response.json(); 
+    data.map((e)=>{
+      rows.push(createData(e.title,e.description))
+    })
+    const temp=createData('Hello','Test')
+    rows.push(temp)
+    console.log(rows)// Corrected to log jsonData
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
+};
+useEffect(() => {fetchData()}, []);
   const handleChangePage = (event, newPage) => {
     setPage(newPage)
   }
@@ -41,7 +62,6 @@ const TableStickyHeader = () => {
     setRowsPerPage(+event.target.value)
     setPage(0)
   }
-
   return (
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
       <TableContainer sx={{ maxHeight: 440 }}>
@@ -59,7 +79,7 @@ const TableStickyHeader = () => {
             {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(row => {
               return (
                 <TableRow hover role='checkbox' tabIndex={-1} key={row.title}>
-                  {columns.map(column => {
+                  {(columns.map(column => {
                     const value = row[column.id]
 
                     return (
@@ -67,7 +87,7 @@ const TableStickyHeader = () => {
                         {value}
                       </TableCell>
                     )
-                  })}
+                  }))}
                 </TableRow>
               )
             })}
@@ -84,7 +104,6 @@ const TableStickyHeader = () => {
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
     </Paper>
-  )
-}
-
+   );
+  }
 export default TableStickyHeader

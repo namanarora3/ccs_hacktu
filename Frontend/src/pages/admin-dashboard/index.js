@@ -1,53 +1,48 @@
-import React from 'react';
-import Card from '@mui/material/Card';
-import Grid from '@mui/material/Grid';
-import CardMembership from '../../components/CardForum';
-import { Doughnut } from 'react-chartjs-2';
+// ** MUI Imports
+import Grid from '@mui/material/Grid'
 
-const AdminDashboard = ({ issues }) => {
-  // Function to get data for the category pie chart
-  const getCategoryChartData = () => {
-    const categoryCounts = {};
-  
-    // Check if issues is defined and not null
-    if (issues && issues.length > 0) {
-      // Count occurrences of each category
-      issues.forEach((issue) => {
-        const category = issue.category;
-        categoryCounts[category] = (categoryCounts[category] || 0) + 1;
-      });
-    }
-  
-    // Convert data to Chart.js format
-    const data = {
-      labels: Object.keys(categoryCounts),
-      datasets: [
-        {
-          data: Object.values(categoryCounts),
-          backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#33cc33'], // Customize colors as needed
-          hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#33cc33'],
-        },
-      ],
-    };
-  
-    return data;
-  };
-  
+// ** Icons Imports
+import Poll from 'mdi-material-ui/Poll'
+import CurrencyUsd from 'mdi-material-ui/CurrencyUsd'
+import HelpCircleOutline from 'mdi-material-ui/HelpCircleOutline'
+import BriefcaseVariantOutline from 'mdi-material-ui/BriefcaseVariantOutline'
 
+// ** Custom Components Imports
+import CardStatisticsVerticalComponent from 'src/@core/components/card-statistics/card-stats-vertical'
+
+// ** Styled Component Import
+import ApexChartWrapper from 'src/@core/styles/libs/react-apexcharts'
+import WeeklyOverview from '../../components/weekly'
+// ** Demo Components Imports
+import Table from 'src/views/dashboard/Table'
+import Trophy from 'src/views/dashboard/Trophy'
+import TotalEarning from 'src/views/dashboard/TotalEarning'
+import StatisticsCard from 'src/views/dashboard/StatisticsCard'
+// import WeeklyOverview from 'src/views/dashboard/WeeklyOverview'
+import DepositWithdraw from 'src/views/dashboard/DepositWithdraw'
+import SalesByCountries from 'src/views/dashboard/SalesByCountries'
+import PieChart from '../../components/PieChart'
+
+const Dashboard = () => {
   return (
-    <Grid container spacing={3}>
-      <Grid item xs={12} md={8}>
-        {/* Display your issues using the CardMembership component */}
-        <CardMembership issues={issues} />
-      </Grid>
-      <Grid item xs={12} md={4}>
-        {/* Display the category pie chart */}
-        <Card>
-          <Doughnut data={getCategoryChartData()} />
-        </Card>
-      </Grid>
-    </Grid>
-  );
-};
+    <ApexChartWrapper>
+      <Grid container spacing={6}>
+        {/* <Grid item xs={12} md={4}>
+          <Trophy />
+        </Grid>*/}
+        <Grid item xs={12} md={12}>
+          <StatisticsCard />
+        </Grid> 
+        <Grid item xs={12} md={6} lg={6}>
+          <WeeklyOverview />
+        </Grid>
+        <Grid item xs={12} md={6} lg={6}>
+          <PieChart />
+        </Grid>
 
-export default AdminDashboard
+      </Grid>
+    </ApexChartWrapper>
+  )
+}
+
+export default Dashboard

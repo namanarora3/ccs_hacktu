@@ -66,14 +66,19 @@ const navigation = (userRole) => {
       icon: FormatLetterCaseIcon,
       path: '/alert'
     },
+    {
+      title: 'Admin Dashboard',
+      icon: AccountCogOutlineIcon,
+      path: '/admin-dashboard'
+    },
   ];
 
   const adminItems = [
     // Add admin-specific items here
     {
-      title: 'Admin Page',
+      title: 'Admin Dashboard',
       icon: AccountCogOutlineIcon,
-      path: '/admin-page'
+      path: '/admin-dashboard'
     },
   ];
 

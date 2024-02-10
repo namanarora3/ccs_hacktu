@@ -21,6 +21,7 @@ function Forum() {
     date: '',
   });
 
+  const [issues, setIssues] = useState([]);
   const handleFilterChange = (event) => {
     const { name, value } = event.target;
     setFilter((prevFilter) => ({
@@ -36,7 +37,6 @@ function Forum() {
     }));
   };
 
-  const [issues, setIssues] = useState([]);
   const fetchData = async () => {
   const token = localStorage.getItem('token');
   try {
@@ -50,12 +50,18 @@ function Forum() {
       throw new Error('Failed to fetch data');
     }
     const jsonData = await response.json();
+    console.log(jsonData); 
     setIssues(jsonData);
+      // Corrected to log jsonData
+    
     console.log(jsonData); // Corrected to log jsonData
   } catch (error) {
     console.error('Error fetching data:', error);
   }
 };
+useEffect(() => {
+  console.log(issues); // Log the updated state
+}, []);
 useEffect(() => {fetchData()}, []);
 
   return (
@@ -98,14 +104,23 @@ useEffect(() => {fetchData()}, []);
           </Select>
         </FormControl>
       </Box>
-      <CardMembership issues={issues.filter((issue) => {
-        return (
-          // issue.upvoteCount >= filter.upvotes &&
-          (filter.category === '' || issue.category === filter.category) &&
-          (filter.location === '' || issue.location === filter.location) &&
-          (filter.date === '' || issue.date === filter.date)
-        );
-      })} />
+      {issues.length === 0 ? (
+          // Handle the case when issues are still being fetched
+          <Typography>Loading issues...</Typography>
+        ) : (
+          // Render the CardMembership component when issues are available
+          <CardMembership
+            issues={issues?.filter((issue) => {
+              return (
+                // issue.upvoteCount >= filter.upvotes &&
+                (filter.category === '' || issue.category === filter.category) &&
+                (filter.location === '' || issue.location === filter.location) &&
+                (filter.date === '' || issue.date === filter.date)
+              );
+            })}
+          />
+          // <CardMembership issues={issues}/>
+        )}
     </div>
     </>
   );
