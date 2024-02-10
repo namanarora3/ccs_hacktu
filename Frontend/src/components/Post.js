@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Card from '@mui/material/Card';
 import Grid from '@mui/material/Grid';
@@ -16,7 +16,7 @@ import Avatar from '@mui/material/Avatar';
 import { Heart, ShareVariant } from 'mdi-material-ui';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-
+import Garbage from '../../public/images/rimjhim/garbage.png';
 // Styled Box component
 const StyledBox = styled(Box)(({ theme }) => ({
   [theme.breakpoints.up('sm')]: {
@@ -96,7 +96,7 @@ const CommentSection =() => {
             </Typography>
             <Typography variant='body2'>{issue.issueDescription}</Typography>
             <Box sx={{marginTop:5}}>
-              <Image src={"http://127.0.0.1:8001/media/images/issues/cat_v97lMyW.webp"} width={'400%'} height={'300%'} alignItems = {'center'} alt='card' /></Box>
+              <Image src={Garbage} width={'400%'} height={'300%'} alignItems = {'center'} alt='card' /></Box>
             <Divider sx={{ marginTop: 6.5, marginBottom: 6.75 }} />
             <Grid container spacing={4}>
               <Grid item xs={12} sm={5}>
@@ -161,26 +161,6 @@ const CommentSection =() => {
                 Submit
               </Button>
             </form>
-          </CardContent>
-        </Grid>
-
-        <Grid
-          item
-          sm={5}
-          xs={12}
-          sx={{ paddingTop: ['0 !important', '1.5rem !important'], paddingLeft: ['1.5rem !important', '0 !important'] }}
-        >
-          <CardContent
-            sx={{
-              height: '100%',
-              display: 'flex',
-              textAlign: 'center',
-              alignItems: 'center',
-              justifyContent: 'center',
-              backgroundColor: 'action.hover',
-              padding: (theme) => `${theme.spacing(18, 5, 16)} !important`
-            }}
-          >
           </CardContent>
         </Grid>
       </Grid>
