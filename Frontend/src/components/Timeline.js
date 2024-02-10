@@ -1,9 +1,13 @@
-// Update the Timeline.js file
-
+// ColorsTimeline.js
 import React from 'react';
-import { Timeline as MuiTimeline, TimelineItem, TimelineSeparator, TimelineConnector, TimelineContent, TimelineDot } from '@mui/material';
+import Timeline from '@mui/lab/Timeline';
+import TimelineItem from '@mui/lab/TimelineItem';
+import TimelineSeparator from '@mui/lab/TimelineSeparator';
+import TimelineConnector from '@mui/lab/TimelineConnector';
+import TimelineContent from '@mui/lab/TimelineContent';
+import TimelineDot from '@mui/lab/TimelineDot';
 
-const Timeline = ({ status }) => {
+const ColorsTimeline = ({ currentStatus, orientation = 'vertical' }) => {
   const statuses = ['Created', 'Accepted by Authorities', 'In Process', 'Problem is Fixed'];
 
   const getStatusIndex = (status) => {
@@ -11,18 +15,18 @@ const Timeline = ({ status }) => {
   };
 
   return (
-    <MuiTimeline align="alternate">
-      {statuses.map((timelineStatus, index) => (
+    <Timeline position="alternate" orientation={orientation}>
+      {statuses.map((status, index) => (
         <TimelineItem key={index}>
           <TimelineSeparator>
-            <TimelineDot color={getStatusIndex(status) >= index ? 'primary' : 'grey'} />
+            <TimelineDot color={getStatusIndex(currentStatus) >= index ? 'primary' : 'grey'} />
             {index < statuses.length - 1 && <TimelineConnector />}
           </TimelineSeparator>
-          <TimelineContent>{timelineStatus}</TimelineContent>
+          <TimelineContent>{status}</TimelineContent>
         </TimelineItem>
       ))}
-    </MuiTimeline>
+    </Timeline>
   );
 };
 
-export default Timeline;
+export default ColorsTimeline;

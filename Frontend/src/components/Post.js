@@ -17,6 +17,8 @@ import { Heart, ShareVariant } from 'mdi-material-ui';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Garbage from '../../public/images/rimjhim/garbage.png';
+import ColorsTimeline from './Timeline';
+
 // Styled Box component
 const StyledBox = styled(Box)(({ theme }) => ({
   [theme.breakpoints.up('sm')]: {
@@ -107,7 +109,7 @@ const CommentSection =() => {
                   </Box>
                   <Box sx={{ display: 'flex', alignItems: 'center' }}>
                     <AccountOutline sx={{ color: 'primary.main', marginRight: 2.75 }} fontSize='small' />
-                    <Typography variant='body2'>DATE: {issue.created}</Typography>
+                    <Typography variant='body2'>DATE:{new Date(issue.created).toLocaleString()} </Typography>
                   </Box>
                 </StyledBox>
               </Grid>
@@ -125,7 +127,10 @@ const CommentSection =() => {
               </Grid>
             </Grid>
             <br />
-            <Box></Box>
+            <Box>
+
+<ColorsTimeline currentStatus="In Process" orientation="horizontal" />
+            </Box>
             <Typography variant='h6' sx={{ marginTop: 3.5 }}>
         Comments
       </Typography>
@@ -143,7 +148,7 @@ const CommentSection =() => {
           No comments yet.
         </Typography>
       )}
-      <Typography sx={{ marginTop: 3.5, fontSize: 20 }}>
+      <Typography variant='h6' sx={{ marginTop: 3.5 }}>
         Add Comments
       </Typography>
             <form onSubmit={handleSubmit}>

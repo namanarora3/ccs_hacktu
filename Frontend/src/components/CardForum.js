@@ -132,7 +132,6 @@ const CardMembership = ({ issues = [] }) => {
     </Box>
   </Grid>
 </Grid>
-
     </CardContent>
             </Grid>
 
