@@ -104,7 +104,7 @@ const CommentSection =() => {
             <Typography sx={{ marginBottom: 3.5, fontSize: 20, fontWeight: 700 }}>
               {issue.title}
             </Typography>
-            <Typography variant='body2'>{issue.issueDescription}</Typography>
+            <Typography variant='body2'>{issue.description}</Typography>
             <Box sx={{marginTop:5}}>
               <Image src={Garbage} width={'400%'} height={'300%'} alignItems = {'center'} alt='card' /></Box>
             <Divider sx={{ marginTop: 6.5, marginBottom: 6.75 }} />
@@ -112,7 +112,7 @@ const CommentSection =() => {
               <Grid item xs={12} sm={5}>
                 <StyledBox>
                   <Box sx={{ mb: 6.75, display: 'flex', alignItems: 'center' }}>
-                    <LockOpenOutline sx={{ color: 'primary.main', marginRight: 2.75 }} fontSize='small' />
+                    <LockOpenOutline sx={{ color: 'psrimary.main', marginRight: 2.75 }} fontSize='small' />
                     <Typography variant='body2'>LOCATION: {issue.long}</Typography>
                   </Box>
                   <Box sx={{ display: 'flex', alignItems: 'center' }}>
@@ -174,6 +174,7 @@ const CommentSection =() => {
               <Button
         variant="outlined"
         color="primary"
+        sx={{marginRight:4}}
         onClick={() => router.push(`/edit-issue/${id}`)}
       >
         Edit Issue Status
