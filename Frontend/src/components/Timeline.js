@@ -8,21 +8,26 @@ import TimelineContent from '@mui/lab/TimelineContent';
 import TimelineDot from '@mui/lab/TimelineDot';
 
 const ColorsTimeline = ({ currentStatus, orientation = 'vertical' }) => {
-  const statuses = ['Created', 'Accepted by Authorities', 'In Process', 'Problem is Fixed'];
+  const statusMap = {
+    1: 'Created',
+    2: 'Accepted by Authorities',
+    3: 'In Process',
+    4: 'Problem is Fixed',
+  };
 
-  const getStatusIndex = (status) => {
-    return statuses.indexOf(status);
+  const getStatusText = (statusNumber) => {
+    return statusMap[statusNumber] || 'Unknown Status';
   };
 
   return (
     <Timeline position="alternate" orientation={orientation}>
-      {statuses.map((status, index) => (
-        <TimelineItem key={index}>
+      {[1, 2, 3, 4].map((statusNumber) => (
+        <TimelineItem key={statusNumber}>
           <TimelineSeparator>
-            <TimelineDot color={getStatusIndex(currentStatus) >= index ? 'primary' : 'grey'} />
-            {index < statuses.length - 1 && <TimelineConnector />}
+            <TimelineDot color={currentStatus >= statusNumber ? 'primary' : 'grey'} />
+            {statusNumber < 4 && <TimelineConnector />}
           </TimelineSeparator>
-          <TimelineContent>{status}</TimelineContent>
+          <TimelineContent>{getStatusText(statusNumber)}</TimelineContent>
         </TimelineItem>
       ))}
     </Timeline>
