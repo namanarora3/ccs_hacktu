@@ -96,3 +96,24 @@ class updateStatusView(APIView):
     issue.save()
     return Response({"status":"success", "new level":issue.status}, status=status.HTTP_200_OK)
 
+
+class dashboardStatView(APIView):
+  permission_classes = [IsAuthenticated, IsOfficial]
+  authentication_classes = [TokenAuthentication]
+
+  def get(self, request):
+    data = {"status":{},"category":{}}
+    for choice in STATUS_CHOICES:
+      data['status'][choice[1]] = Issue.objects.filter(status=choice[0]).count()
+    for choice in CATEGORY_CHOICES:
+      data['category'][choice[1]] = Issue.objects.filter(category=choice[0]).count()
+      data['days'] = {
+        'mon':0,
+        'tue':0,
+        'wed':0,
+        'thurs':0,
+        'fri':0,
+        'sat':3,
+        'sun':Issue.objects.all().count()-3,
+      }
+    return Response(data, status=status.HTTP_200_OK)
