@@ -110,7 +110,7 @@ const CardMembership = ({ issues = [] }) => {
     <StyledBox>
       <Box sx={{ mb: 6.75, display: 'flex', alignItems: 'center' }}>
         <LockOpenOutline sx={{ color: 'primary.main', marginRight: 2.75 }} fontSize='small' />
-        <Typography variant='body2'>LOCATION: {issue.long}</Typography>
+        <Typography variant='body2'>LOCATION: Bhupindra Road, Patiala</Typography>
       </Box>
       <Box sx={{ display: 'flex', alignItems: 'center' }}>
         <AccountOutline sx={{ color: 'primary.main', marginRight: 2.75 }} fontSize='small' />
@@ -132,6 +132,7 @@ const CardMembership = ({ issues = [] }) => {
     </Box>
   </Grid>
 </Grid>
+
     </CardContent>
             </Grid>
 
@@ -152,9 +153,11 @@ const CardMembership = ({ issues = [] }) => {
                   padding: theme => `${theme.spacing(18, 5, 16)} !important`
                 }}
               >
+                
                 <Box>
-                  <Image className={styles.img1} src={issue.image} alt='card' width={'500%'} height={'400%'}/>
+                  <Image className={styles.img1} src={issue.image} alt='card' width={'200%'} height={'200%'}/>
                 </Box>
+                
               </CardContent>
             </Grid>
           </Grid>
