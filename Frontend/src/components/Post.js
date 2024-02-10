@@ -25,6 +25,14 @@ const StyledBox = styled(Box)(({ theme }) => ({
     borderRight: `1px solid ${theme.palette.divider}`
   }
 }));
+const getUserInfo = () => {
+  // ... fetch user info logic
+  // Return user data, including the role
+  return { role: 'admin' }; // Replace with your actual user data
+};
+
+const user = getUserInfo();
+
 
 const CommentSection =() => {
   const [comments, setComments] = useState('');
@@ -162,6 +170,14 @@ const CommentSection =() => {
                 sx={{ width: '70%', marginBottom: 5.5 }}
               />
               <br />
+              {user.role === 'admin' && (
+              <Button
+        variant="outlined"
+        color="primary"
+        onClick={() => router.push(`/edit-issue/${id}`)}
+      >
+        Edit Issue Status
+      </Button>)}
               <Button type="submit" variant="contained" color="primary" sx={{  }}>
                 Submit
               </Button>
