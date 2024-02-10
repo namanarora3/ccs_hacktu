@@ -132,6 +132,7 @@ const CardMembership = ({ issues = [] }) => {
     </Box>
   </Grid>
 </Grid>
+
     </CardContent>
             </Grid>
 
@@ -152,9 +153,11 @@ const CardMembership = ({ issues = [] }) => {
                   padding: theme => `${theme.spacing(18, 5, 16)} !important`
                 }}
               >
+                
                 <Box>
-                  <Image className={styles.img1} src={issue.image} alt='card' width={'500%'} height={'400%'}/>
+                  <Image className={styles.img1} src={issue.image} alt='card' width={'200%'} height={'200%'}/>
                 </Box>
+                
               </CardContent>
             </Grid>
           </Grid>
