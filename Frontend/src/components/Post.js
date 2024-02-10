@@ -129,7 +129,7 @@ const CommentSection =() => {
             <br />
             <Box>
 
-<ColorsTimeline currentStatus="In Process" orientation="horizontal" />
+<ColorsTimeline currentStatus={issue.status} orientation="horizontal" />
             </Box>
             <Typography variant='h6' sx={{ marginTop: 3.5 }}>
         Comments
