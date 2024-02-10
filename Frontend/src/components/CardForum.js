@@ -121,8 +121,8 @@ const CardMembership = ({ issues = [] }) => {
   <Grid item xs={12} sm={7}>
     <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
         <Button onClick={() => handleUpvote(index)} color="primary" sx={{ marginRight: 1 }}>
-          <StarOutline sx={{ color: 'primary.main', variant: 'outlined', alignSelf: left, marginTop:2 }} fontSize='small' />
-          <Typography variant='body2' sx={{marginLeft:2, marginTop:1}}>Upvote {upvoteCounts[index] || issue.upvoteCount}</Typography>
+          <StarOutline sx={{ color: 'primary.main', variant: 'outlined', alignSelf: left, marginTop:0 }} fontSize='small' />
+          <Typography variant='body2' sx={{marginLeft:2, marginTop:0}}>Upvote {upvoteCounts[index] || issue.upvoteCount}</Typography>
         </Button>
         
       <Box sx={{ mb: 1, display: 'flex', alignItems: 'center' }}>
@@ -155,7 +155,7 @@ const CardMembership = ({ issues = [] }) => {
               >
                 
                 <Box>
-                  <Image className={styles.img1} src={issue.image} alt='card' width={'200%'} height={'200%'}/>
+                  <Image className={styles.img1} src={issue.image} alt='card' width={'350%'} height={'250%'}/>
                 </Box>
                 
               </CardContent>
