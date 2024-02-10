@@ -77,7 +77,7 @@ const MapView = () => {
           />
         ))}
       </GoogleMap>
-      <Card style={{width:'50%'}}>
+      <Card style={{width:'100%'}}>
       {selectedIssue && (
         <div style={{ marginLeft: '20px'}}>
           <h2>{selectedIssue.title}</h2>
