@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Card from '@mui/material/Card';
 import Grid from '@mui/material/Grid';
@@ -16,6 +16,8 @@ import Avatar from '@mui/material/Avatar';
 import { Heart, ShareVariant } from 'mdi-material-ui';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import Garbage from '../../public/images/rimjhim/garbage.png';
+import ColorsTimeline from './Timeline';
 
 // Styled Box component
 const StyledBox = styled(Box)(({ theme }) => ({
@@ -23,6 +25,14 @@ const StyledBox = styled(Box)(({ theme }) => ({
     borderRight: `1px solid ${theme.palette.divider}`
   }
 }));
+const getUserInfo = () => {
+  // ... fetch user info logic
+  // Return user data, including the role
+  return { role: 'admin' }; // Replace with your actual user data
+};
+
+const user = getUserInfo();
+
 
 const CommentSection =() => {
   const [comments, setComments] = useState('');
@@ -96,7 +106,7 @@ const CommentSection =() => {
             </Typography>
             <Typography variant='body2'>{issue.issueDescription}</Typography>
             <Box sx={{marginTop:5}}>
-              <Image src={"http://127.0.0.1:8001/media/images/issues/cat_v97lMyW.webp"} width={'400%'} height={'300%'} alignItems = {'center'} alt='card' /></Box>
+              <Image src={Garbage} width={'400%'} height={'300%'} alignItems = {'center'} alt='card' /></Box>
             <Divider sx={{ marginTop: 6.5, marginBottom: 6.75 }} />
             <Grid container spacing={4}>
               <Grid item xs={12} sm={5}>
@@ -107,7 +117,7 @@ const CommentSection =() => {
                   </Box>
                   <Box sx={{ display: 'flex', alignItems: 'center' }}>
                     <AccountOutline sx={{ color: 'primary.main', marginRight: 2.75 }} fontSize='small' />
-                    <Typography variant='body2'>DATE: {issue.created}</Typography>
+                    <Typography variant='body2'>DATE:{new Date(issue.created).toLocaleString()} </Typography>
                   </Box>
                 </StyledBox>
               </Grid>
@@ -125,7 +135,10 @@ const CommentSection =() => {
               </Grid>
             </Grid>
             <br />
-            <Box></Box>
+            <Box>
+
+<ColorsTimeline currentStatus={issue.status} orientation="horizontal" />
+            </Box>
             <Typography variant='h6' sx={{ marginTop: 3.5 }}>
         Comments
       </Typography>
@@ -143,7 +156,7 @@ const CommentSection =() => {
           No comments yet.
         </Typography>
       )}
-      <Typography sx={{ marginTop: 3.5, fontSize: 20 }}>
+      <Typography variant='h6' sx={{ marginTop: 3.5 }}>
         Add Comments
       </Typography>
             <form onSubmit={handleSubmit}>
@@ -157,30 +170,18 @@ const CommentSection =() => {
                 sx={{ width: '70%', marginBottom: 5.5 }}
               />
               <br />
+              {user.role === 'admin' && (
+              <Button
+        variant="outlined"
+        color="primary"
+        onClick={() => router.push(`/edit-issue/${id}`)}
+      >
+        Edit Issue Status
+      </Button>)}
               <Button type="submit" variant="contained" color="primary" sx={{  }}>
                 Submit
               </Button>
             </form>
-          </CardContent>
-        </Grid>
-
-        <Grid
-          item
-          sm={5}
-          xs={12}
-          sx={{ paddingTop: ['0 !important', '1.5rem !important'], paddingLeft: ['1.5rem !important', '0 !important'] }}
-        >
-          <CardContent
-            sx={{
-              height: '100%',
-              display: 'flex',
-              textAlign: 'center',
-              alignItems: 'center',
-              justifyContent: 'center',
-              backgroundColor: 'action.hover',
-              padding: (theme) => `${theme.spacing(18, 5, 16)} !important`
-            }}
-          >
           </CardContent>
         </Grid>
       </Grid>
