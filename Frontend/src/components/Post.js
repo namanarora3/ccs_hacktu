@@ -113,7 +113,7 @@ const CommentSection =() => {
                 <StyledBox>
                   <Box sx={{ mb: 6.75, display: 'flex', alignItems: 'center' }}>
                     <LockOpenOutline sx={{ color: 'psrimary.main', marginRight: 2.75 }} fontSize='small' />
-                    <Typography variant='body2'>LOCATION: {issue.long}</Typography>
+                    <Typography variant='body2'>LOCATION: Bhupindra Road, Patiala</Typography>
                   </Box>
                   <Box sx={{ display: 'flex', alignItems: 'center' }}>
                     <AccountOutline sx={{ color: 'primary.main', marginRight: 2.75 }} fontSize='small' />
