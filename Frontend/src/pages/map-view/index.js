@@ -67,7 +67,7 @@ const MapView = () => {
         zoom={14}
         center={{ lat: parseFloat(locations[0].lat), lng: parseFloat(locations[0].lng) }}
         mapTypeId="roadmap"
-        mapContainerStyle={{ width: '800px', height: '800px' }}
+        mapContainerStyle={{ width: '1600px', height: '700px' }}
       >
         {locations.map((location, index) => (
           <Marker
@@ -84,7 +84,7 @@ const MapView = () => {
           <p>{selectedIssue.description}</p>
           <p>Category: {selectedIssue.category}</p>
           <p>Created by: {selectedIssue.user_name}</p>
-          <img src={selectedIssue.image} alt={selectedIssue.title} style={{ maxWidth: '100%', maxHeight: '300px' }} />
+          <img src={selectedIssue.image} alt={selectedIssue.title} style={{ maxWidth: '50%', maxHeight: '300px' }} />
         </div>
       )}
       </Card>
