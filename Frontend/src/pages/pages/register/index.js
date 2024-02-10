@@ -182,9 +182,9 @@ const RegisterPage = () => {
           </Box>
           <Box sx={{ mb: 6 }}>
             <Typography variant='h5' sx={{ fontWeight: 600, marginBottom: 1.5 }}>
-              Adventure starts here 🚀
+              Hello There!
             </Typography>
-            <Typography variant='body2'>Make your app management easy and fun!</Typography>
+            <Typography variant='body2'>Let's together fix the problems around us</Typography>
           </Box>
           <form noValidate autoComplete='off' onSubmit={handleSubmit}>
             <TextField autoFocus fullWidth id='username' label='Username' value={username} onChange={(e) => setUsername(e.target.value)} sx={{ marginBottom: 4 }} />

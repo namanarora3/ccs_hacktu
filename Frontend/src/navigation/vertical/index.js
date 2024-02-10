@@ -11,40 +11,17 @@ import AlertCircleOutlineIcon from 'mdi-material-ui/AlertCircleOutline'
 import GoogleCirclesExtendedIcon from 'mdi-material-ui/GoogleCirclesExtended'
 
 const navigation = (userRole) => {
+  if (typeof window !== 'undefined') {
+    // Perform localStorage action
+    if(localStorage.getItem('admin')=="true"){
+      userRole="admin"
+    }
+    else
+    userRole="user"
+  }
   const commonItems = [
     {
-      title: 'Dashboard',
-      icon: HomeOutlineIcon,
-      path: '/'
-    },
-    {
-      sectionTitle: 'Pages'
-    },
-    {
-      title: 'Login',
-      icon: LoginIcon,
-      path: '/pages/login',
-      openInNewTab: true
-    },
-    {
-      title: 'Register',
-      icon: AccountPlusOutlineIcon,
-      path: '/pages/register',
-      openInNewTab: true
-    },
-    {
-      title: 'Error',
-      icon: AlertCircleOutlineIcon,
-      path: '/pages/error',
-      openInNewTab: true
-    },
-    {
       sectionTitle: 'User Interface'
-    },
-    {
-      title: 'Add Issue',
-      icon: FormatLetterCaseIcon,
-      path: '/add-issue'
     },
     {
       title: 'Map View',
@@ -61,37 +38,37 @@ const navigation = (userRole) => {
       icon: FormatLetterCaseIcon,
       path: '/alert-display'
     },
-    {
-      title: 'Create Alert',
-      icon: FormatLetterCaseIcon,
-      path: '/alert'
-    },
-    {
-      title: 'Admin Dashboard',
-      icon: AccountCogOutlineIcon,
-      path: '/admin-dashboard'
-    },
   ];
 
   const adminItems = [
     // Add admin-specific items here
     {
-      title: 'Admin Dashboard',
-      icon: AccountCogOutlineIcon,
-      path: '/admin-dashboard'
+      title: 'Dashboard',
+      icon: HomeOutlineIcon,
+      path: '/'
+    },
+    {
+      title: 'Create Alert',
+      icon: FormatLetterCaseIcon,
+      path: '/alert'
     },
   ];
 
   const userItems = [
     // Add user-specific items here
     {
+      title: 'Add Issue',
+      icon: FormatLetterCaseIcon,
+      path: '/add-issue'
+    },
+    {
       title: 'User Page',
       icon: CreditCardOutlineIcon,
       path: '/user-page'
-    },
+    }
   ];
 
-  return [...commonItems, ...(userRole === 'admin' ? adminItems : userItems)];
+  return [...(userRole === 'admin' ? adminItems : userItems),...commonItems];
 }
 
 export default navigation;

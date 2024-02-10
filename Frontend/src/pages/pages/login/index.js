@@ -80,7 +80,8 @@ const LoginPage = () => {
     if (response.ok) {
       const data = await response.json();
       localStorage.setItem('token', data.Token);
-      router.push('/');
+      localStorage.setItem('admin', data.admin);
+      router.push('/forum/');
     } else {
       console.error('Error occurred:', response.statusText);
     }
@@ -183,7 +184,7 @@ const LoginPage = () => {
             <Typography variant='h5' sx={{ fontWeight: 600, marginBottom: 1.5 }}>
               Welcome to {themeConfig.templateName}! 👋🏻
             </Typography>
-            <Typography variant='body2'>Please sign-in to your account and start the adventure</Typography>
+            <Typography variant='body2'>Please sign-in to your account</Typography>
           </Box>
           <form noValidate autoComplete='off' onSubmit={handleSubmit}>
             <TextField autoFocus fullWidth id='email' label='Email' value={email} sx={{ marginBottom: 4 }} onChange={(e) => setEmail(e.target.value)} />

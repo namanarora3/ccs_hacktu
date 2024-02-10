@@ -175,7 +175,7 @@ const CommentSection =() => {
         variant="outlined"
         color="primary"
         sx={{marginRight:4}}
-        onClick={() => router.push(`/edit-issue/${id}`)}
+        onClick={() => router.push(`/edit-issue/`)}
       >
         Edit Issue Status
       </Button>)}
