@@ -34,7 +34,6 @@ const IssuesPage = () => {
     // Logic to handle submitting comments
     console.log(`Comment submitted for issue ${issueId}: ${comment}`);
   };
-
   
   return (
     <div>

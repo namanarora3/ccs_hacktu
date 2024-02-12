@@ -21,7 +21,7 @@ function Forum() {
     date: '',
   });
 
-  const [issues, setIssues] = useState([]);
+  const [issues, setIssues] = useState(null);
   const handleFilterChange = (event) => {
     const { name, value } = event.target;
     setFilter((prevFilter) => ({
@@ -29,21 +29,13 @@ function Forum() {
       [name]: value,
     }));
   };
-
-  const handleSliderChange = (event, newValue) => {
-    setFilter((prevFilter) => ({
-      ...prevFilter,
-      upvotes: newValue,
-    }));
-  };
-
-  const fetchData = async () => {
+useEffect(() => {
+  const fetchData=async()=>{
   const token = localStorage.getItem('token');
   try {
     const response = await fetch('http://127.0.0.1:8001/issue/', {
       headers: {
         'Authorization': `Token ${token}`,
-        'Content-Type': 'application/json'
       }
     });
     if (!response.ok) {
@@ -51,19 +43,16 @@ function Forum() {
     }
     const jsonData = await response.json();
     console.log(jsonData); 
-    setIssues(jsonData);
-      // Corrected to log jsonData
-    
-    console.log(jsonData); // Corrected to log jsonData
+      setIssues(jsonData);
   } catch (error) {
     console.error('Error fetching data:', error);
   }
 };
-useEffect(() => {
-  console.log(issues); // Log the updated state
-}, []);
-useEffect(() => {fetchData()}, []);
-
+fetchData();}
+, []);
+if(issues==null)
+return(<p>Loading...</p>)
+else
   return (
     <>
     <Typography variant='h4' sx={{ mb: 4 }}> 

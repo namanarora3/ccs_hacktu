@@ -256,12 +256,12 @@ const AlertDropdown = () => {
 
   const alertDataArray = [
     {
-      title: 'Water Clog',
-      description: 'Water clog in my area poses a serious threat, caus…s issue and safeguard our community\'s well-being.',
+      title: 'Expected Power Outage',
+      description: 'Expected Power Outage in Patiala today',
     },
     {
-      title: 'Light Not Working',
-      description: 'Non-functional street lights in my area pose safet…ell-lit environment for residents and pedestrians',
+      title: 'Fixage of Potholes',
+      description: 'Problem of potholes in your area are fixed now',
     },
     // Add more alerts as needed
   ];

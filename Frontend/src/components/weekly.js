@@ -13,7 +13,7 @@ import ReactApexcharts from 'src/@core/components/react-apexcharts';
 const WeeklyOverview = () => {
   const theme = useTheme();
 
-  const dailyIssueCounts = [10, 5, 8, 15, 12, 7, 9]; // Sample data, replace it with your actual data
+  const dailyIssueCounts = [0,0,0,0,0,2,4]; // Sample data, replace it with your actual data
 
   const options = {
     chart: {
@@ -48,9 +48,10 @@ const WeeklyOverview = () => {
       theme.palette.background.default,
       theme.palette.background.default,
       theme.palette.background.default,
-      theme.palette.primary.main,
       theme.palette.background.default,
-      theme.palette.background.default
+      theme.palette.background.default,
+      theme.palette.primary.main,
+      theme.palette.primary.main,
     ],
     states: {
       hover: {
@@ -72,7 +73,7 @@ const WeeklyOverview = () => {
       tickAmount: 4,
       labels: {
         offsetX: -17,
-        formatter: value => `${value > 999 ? `${(value / 1000).toFixed(0)}` : value}k`
+        formatter: value => `${value > 999 ? `${(value / 1000).toFixed(0)}` : value}`
       }
     }
   };

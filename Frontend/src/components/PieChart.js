@@ -13,8 +13,8 @@ import ReactApexcharts from 'src/@core/components/react-apexcharts';
 const PieChart = () => {
   const theme = useTheme();
 
-  const issueCategories = ['Water', 'Infra', 'Electrical', 'Road', 'Other'];
-  const categoryData = [30, 20, 15, 25, 10]; // Sample data, replace it with your actual data
+  const issueCategories = ['Water', 'Infra', 'Electrical', 'Social Justice', 'Other'];
+  const categoryData = [40,20,20,20,0]; // Sample data, replace it with your actual data
 
   const options = {
     chart: {

@@ -4,13 +4,35 @@ import { useRouter } from 'next/router';
 import { Button, FormControl, InputLabel, MenuItem, Select, Typography } from '@mui/material';
 
 const EditIssueStatus = () => {
+  const [selectedOption, setSelectedOption] = useState('');
+  const handleChange = (event) => {
+    setSelectedOption(event.target.value);
+  };
   const router = useRouter();
-  const { id } = router.query; // Assuming the issue ID is passed in the query params
+  const { id } = router.query; 
 
   const [status, setStatus] = useState('');
 
   const handleStatusChange = (event) => {
     setStatus(event.target.value);
+  };
+
+  const handleSubmit = async () => {
+    try {
+      const token=localStorage.getItem('token')
+      const response = await fetch(`http://127.0.0.1:8001/issue/update/${id}/`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Token ${token}`
+        },
+        body: JSON.stringify({ level: selectedOption }),
+      });
+      const responseData = await response.json();
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    setSelectedOption('')
   };
 
   const handleUpdateStatus = async () => {
@@ -37,20 +59,22 @@ const EditIssueStatus = () => {
       console.error('Error updating issue status:', error);
     }
   };
-
+  if(id==null)
+  return(<p>Loading...</p>)
+  else
   return (
     <div>
       <Typography variant="h4">Edit Issue Status</Typography>
       <FormControl fullWidth sx={{ marginY: 2 }}>
         <InputLabel>Status</InputLabel>
-        <Select value={status} onChange={handleStatusChange}>
-          <MenuItem value="Created">Created</MenuItem>
-          <MenuItem value="Accepted">Accepted by Authorities</MenuItem>
-          <MenuItem value="InProcess">In Process</MenuItem>
-          <MenuItem value="Fixed">Problem is Fixed</MenuItem>
+        <Select value={selectedOption} onChange={handleChange}>
+          <MenuItem value="1">Created</MenuItem>
+          <MenuItem value="2">Accepted by Authorities</MenuItem>
+          <MenuItem value="3">In Process</MenuItem>
+          <MenuItem value="4">Problem is Fixed</MenuItem>
         </Select>
       </FormControl>
-      <Button variant="contained" color="primary" onClick={handleUpdateStatus}>
+      <Button variant="contained" color="primary" onClick={handleSubmit}>
         Update Status
       </Button>
     </div>

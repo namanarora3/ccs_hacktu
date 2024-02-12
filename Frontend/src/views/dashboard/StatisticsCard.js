@@ -18,22 +18,22 @@ import AccountOutline from 'mdi-material-ui/AccountOutline'
 
 const issueStatusData = [
   {
-    stats: '245',
+    stats: '1',
     title: 'Created',
     color: 'primary',
   },
   {
-    stats: '120',
+    stats: '1',
     title: 'Accepted by Authorities',
     color: 'success',
   },
   {
-    stats: '80',
+    stats: '2',
     title: 'In Process',
     color: 'warning',
   },
   {
-    stats: '45',
+    stats: '1',
     title: 'Problem is Fixed',
     color: 'info',
   }
@@ -79,9 +79,7 @@ const IssueStatusCard = () => {
         subheader={
           <Typography variant='body2'>
             <Box component='span' sx={{ fontWeight: 600, color: 'text.primary' }}>
-              Total Issues
             </Box>{' '}
-            😎 by status
           </Typography>
         }
         titleTypographyProps={{

@@ -13,55 +13,52 @@ import TablePagination from '@mui/material/TablePagination'
 
 const TableStickyHeader = () => {
   // ** States
+  const [data, setData] = useState(null);
   const columns = [
     { id: 'title', label: 'Title', minWidth: 100 },
     { id: 'description', label: 'Description', minWidth: 300 }
   ]
-  
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const token=localStorage.getItem('token')
+        const response = await fetch('http://127.0.0.1:8001/alerts/',{
+          headers:{
+            'Authorization':`Token ${token}`
+          }
+        }); // Replace with your API endpoint
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const jsonData = await response.json();
+        setData(jsonData);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+    fetchData();
+  }, []);
   function createData(title, description) {
     return { title, description }
   }
   const rows = [
     // Add more rows as needed
-    createData("Water Clog","Water clog in my area poses a serious threat, caus…s issue and safeguard our community's well-being."),
-    createData("Light Not Working","Non-functional street lights in my area pose safet…ell-lit environment for residents and pedestrians")
   ]
+  if(data!=null){
+    console.log(data.data)
+    data.data.map(e=>{
+      rows.push(createData(e.title,e.discription))
+    })
+  }
   const [page, setPage] = useState(0)
   const [rowsPerPage, setRowsPerPage] = useState(10)
-  const data= [];
-  const fetchData = async () => {
-  const token = localStorage.getItem('token');
-  try {
-    const response = await fetch('http://127.0.0.1:8001/issue/', {
-      headers: {
-        'Authorization': `Token ${token}`,
-        'Content-Type': 'application/json'
-      }
-    });
-    if (!response.ok) {
-      throw new Error('Failed to fetch data');
-    }
-    // const jsonData = await response.json();
-    data=await response.json(); 
-    data.map((e)=>{
-      rows.push(createData(e.title,e.description))
-    })
-    const temp=createData('Hello','Test')
-    rows.push(temp)
-    console.log(rows)// Corrected to log jsonData
-  } catch (error) {
-    console.error('Error fetching data:', error);
-  }
-};
-useEffect(() => {fetchData()}, []);
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage)
-  }
-
   const handleChangeRowsPerPage = event => {
     setRowsPerPage(+event.target.value)
     setPage(0)
   }
+  if(data==null)
+  return(<p>Loading...</p>)
+  else{
   return (
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
       <TableContainer sx={{ maxHeight: 440 }}>
@@ -100,10 +97,10 @@ useEffect(() => {fetchData()}, []);
         count={rows.length}
         rowsPerPage={rowsPerPage}
         page={page}
-        onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
     </Paper>
    );
   }
+}
 export default TableStickyHeader

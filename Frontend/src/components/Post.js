@@ -40,6 +40,7 @@ const CommentSection =() => {
     const router = useRouter();
     const [image,setImage]=useState('');
     const [issue, setIssue] = useState([]);
+    const [admin,setAdmin]=useState(true);
     const { id } =router.query;
 
   const handleSubmit = async(event) => {
@@ -65,6 +66,7 @@ const CommentSection =() => {
 
   useEffect(() => {
     const token=localStorage.getItem('token')
+    admin=localStorage.getItem('admin')
     const fetchData = async () => {
       if (id) {
         const response = await fetch(`http://127.0.0.1:8001/issue/${id}/`,{
@@ -74,11 +76,8 @@ const CommentSection =() => {
         });
         if (response.ok) {
           const data = await response.json();
-          if(data){
-            setIssue(data?.data);
-            setImage(data?.data.image)
-            console.log(image)
-          }
+            setIssue(data.data);
+            setImage(data.data.image)
         } else {
           setError('Failed to fetch post data');
         }
@@ -86,7 +85,9 @@ const CommentSection =() => {
     };
     fetchData();
   }, [id]); 
-
+  if(issue==null || image==null)
+  return(<p>Loading...</p>)
+  else
   return (
     <Card sx={{ marginBottom: 2 }}>
       <Grid container spacing={6}>
@@ -106,7 +107,7 @@ const CommentSection =() => {
             </Typography>
             <Typography variant='body2'>{issue.description}</Typography>
             <Box sx={{marginTop:5}}>
-              <Image src={Garbage} width={'400%'} height={'300%'} alignItems = {'center'} alt='card' /></Box>
+              <Image src={(image)?image:Garbage} width={'400%'} height={'300%'} alignItems = {'center'} alt='card' /></Box>
             <Divider sx={{ marginTop: 6.5, marginBottom: 6.75 }} />
             <Grid container spacing={4}>
               <Grid item xs={12} sm={5}>
@@ -170,12 +171,12 @@ const CommentSection =() => {
                 sx={{ width: '70%', marginBottom: 5.5 }}
               />
               <br />
-              {user.role === 'admin' && (
+              {admin == true && (
               <Button
         variant="outlined"
         color="primary"
         sx={{marginRight:4}}
-        onClick={() => router.push(`/edit-issue/`)}
+        onClick={() => router.push(`/edit-issue/?id=${id}`)}
       >
         Edit Issue Status
       </Button>)}

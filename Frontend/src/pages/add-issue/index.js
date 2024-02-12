@@ -59,7 +59,7 @@ const AddIssueForm = () => {
 
     const formData = new FormData();
     formData.append('title', title);
-    formData.append('category', "infra");
+    formData.append('category', category);
     formData.append('description', description);
     formData.append('image', image);
     formData.append('lat',selectedLocation.lat );
