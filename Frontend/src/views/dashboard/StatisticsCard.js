@@ -15,15 +15,14 @@ import DotsVertical from 'mdi-material-ui/DotsVertical'
 import CellphoneLink from 'mdi-material-ui/CellphoneLink'
 import AccountOutline from 'mdi-material-ui/AccountOutline'
 // ... (previous code)
-
-const issueStatusData = [
+const dynamicIssueStatusData = [
   {
-    stats: '1',
+    stats: '245',
     title: 'Created',
     color: 'primary',
   },
   {
-    stats: '1',
+    stats: '120',
     title: 'Accepted by Authorities',
     color: 'success',
   },
@@ -33,14 +32,14 @@ const issueStatusData = [
     color: 'warning',
   },
   {
-    stats: '1',
+    stats: '45',
     title: 'Problem is Fixed',
     color: 'info',
   }
 ];
 
-const renderStats = () => {
-  return issueStatusData.map((item, index) => (
+const renderStats = (data) => {
+  return data.map((item, index) => (
     <Grid item xs={12} sm={3} key={index}>
       <Box key={index} sx={{ display: 'flex', alignItems: 'center' }}>
         <Avatar
@@ -54,7 +53,6 @@ const renderStats = () => {
             backgroundColor: `${item.color}.main`
           }}
         >
-          {/* Use icons or initials based on your preference */}
           {item.title.charAt(0)}
         </Avatar>
         <Box sx={{ display: 'flex', flexDirection: 'column' }}>
@@ -92,7 +90,7 @@ const IssueStatusCard = () => {
       />
       <CardContent sx={{ pt: theme => `${theme.spacing(3)} !important` }}>
         <Grid container spacing={[5, 0]}>
-          {renderStats()}
+          {renderStats(dynamicIssueStatusData)}
         </Grid>
       </CardContent>
     </Card>
