@@ -32,10 +32,10 @@ By integrating the Google Maps API, SevaSangh provides a real-time, visual map o
 In emergencies, SevaSangh delivers instant alerts directly to users' phones, keeping citizens informed about road blockades, water, or electricity-related issues. SevaSangh isn't just a platform; it's a game-changer, transforming the dynamics between citizens and their government. Join us in revolutionizing public services, where your voice matters, and SevaSangh is the conduit for change.
 
 ## Contributors:
-[Rimjhim Mittal](https://github.com/rimjhimittal)
-[Naman Arora](https://github.com/namanarora3)
-[Daksh Raheja](https://github.com/dakshraheja03)
-[Kush Gupta](https://github.com/PikaPool2402)
+1. [Rimjhim Mittal](https://github.com/rimjhimittal)
+2. [Naman Arora](https://github.com/namanarora3)
+3. [Daksh Raheja](https://github.com/dakshraheja03)
+4. [Kush Gupta](https://github.com/PikaPool2402)
 
 ## Link to Project Video
 
