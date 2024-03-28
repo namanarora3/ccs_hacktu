@@ -20,7 +20,6 @@ import MapComponent from 'src/components/MapComponent';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 
-// Assuming you have a component for displaying a map
 
 // Import styles for third-party libraries
 import 'react-datepicker/dist/react-datepicker.css';
